@@ -1,0 +1,20 @@
+﻿{
+  "Width": 64,
+  "Height": 32,
+  "Size": 16,
+  "Sprites": {
+    "SolidBlack": {
+      "Fore": 0
+    },
+    "SolidMauve": {
+      "Fore": 1
+    },
+    "BrickPit.CyanWater.Middle": {
+      "Animated": true,
+      "Fore": 1671,
+      "Back": 1677,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    }
+  }
+}
