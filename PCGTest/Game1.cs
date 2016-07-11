@@ -37,8 +37,6 @@ namespace PCGTest
             // Cap frame rate at 60hz
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);
             IsFixedTimeStep = true;
-            // Avoid anti-aliased drawing
-            graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
             // Set size to largest whole multiple of 800x480
             var screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             var screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -106,7 +104,7 @@ namespace PCGTest
 
             // Draw to screen
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
             spriteBatch.Draw(VirtualTarget, GraphicsDevice.Viewport.Bounds, Color.White);
             spriteBatch.End();
         }

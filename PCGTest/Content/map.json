@@ -3,18 +3,408 @@
   "Height": 32,
   "Size": 16,
   "Sprites": {
+    // Solid color tiles
     "SolidBlack": {
-      "Fore": 0
+      "Fore": 1344
     },
     "SolidMauve": {
+      "Fore": 1345
+    },
+    "SolidDarkBlue": {
+      "Fore": 1346
+    },
+    "SolidDarkGray": {
+      "Fore": 1347
+    },
+    "SolidBrown": {
+      "Fore": 1348
+    },
+    "SolidDarkGreen": {
+      "Fore": 1349
+    },
+    "SolidRed": {
+      "Fore": 1350
+    },
+    "SolidGray": {
+      "Fore": 1351
+    },
+    "SolidBlue": {
+      "Fore": 1352
+    },
+    "SolidOrange": {
+      "Fore": 1353
+    },
+    "SolidLiteGray": {
+      "Fore": 1354
+    },
+    "SolidGreen": {
+      "Fore": 1355
+    },
+    "SolidPink": {
+      "Fore": 1356
+    },
+    "SolidCyan": {
+      "Fore": 1357
+    },
+    "SolidYellow": {
+      "Fore": 1358
+    },
+    "SolidWhite": {
+      "Fore": 1359
+    },
+
+    // Smooth walls
+    "SmoothWall.LiteBlue.TopLeft": {
+      "Fore": 0
+    },
+    "SmoothWall.LiteBlue.Horizontal": {
       "Fore": 1
+    },
+    "SmoothWall.LiteBlue.TopRight": {
+      "Fore": 2
+    },
+    "SmoothWall.LiteBlue.Vertical": {
+      "Fore": 64
+    },
+    "SmoothWall.LiteBlue.TopCap": {
+      "Fore": 65
+    },
+    "SmoothWall.LiteBlue.MiddleRight": {
+      "Fore": 66
+    },
+    "SmoothWall.LiteBlue.BottomLeft": {
+      "Fore": 128
+    },
+    "SmoothWall.LiteBlue.BottomCap": {
+      "Fore": 129
+    },
+    "SmoothWall.LiteBlue.BottomRight": {
+      "Fore": 130
+    },
+    "SmoothWall.LiteBlue.Field": {
+      "Fore": 4
+    },
+    "SmoothWall.LiteBlue.TeeTop": {
+      "Fore": 5
+    },
+    "SmoothWall.LiteBlue.TeeLeft": {
+      "Fore": 67
+    },
+    "SmoothWall.LiteBlue.Cross": {
+      "Fore": 68
+    },
+    "SmoothWall.LiteBlue.TeeRight": {
+      "Fore": 69
+    },
+    "SmoothWall.LiteBlue.TeeBottom": {
+      "Fore": 132
+    },
+
+    // Brick walls
+    "BrickWall.LiteBlue.TopLeft": {
+      "Fore": 192
+    },
+    "BrickWall.LiteBlue.Horizontal": {
+      "Fore": 193
+    },
+    "BrickWall.LiteBlue.TopRight": {
+      "Fore": 194
+    },
+    "BrickWall.LiteBlue.Vertical": {
+      "Fore": 256
+    },
+    "BrickWall.LiteBlue.TopCap": {
+      "Fore": 257
+    },
+    "BrickWall.LiteBlue.MiddleRight": {
+      "Fore": 258
+    },
+    "BrickWall.LiteBlue.BottomLeft": {
+      "Fore": 320
+    },
+    "BrickWall.LiteBlue.BottomCap": {
+      "Fore": 321
+    },
+    "BrickWall.LiteBlue.BottomRight": {
+      "Fore": 322
+    },
+    "BrickWall.LiteBlue.Field": {
+      "Fore": 196
+    },
+    "BrickWall.LiteBlue.TeeTop": {
+      "Fore": 197
+    },
+    "BrickWall.LiteBlue.TeeLeft": {
+      "Fore": 259
+    },
+    "BrickWall.LiteBlue.Cross": {
+      "Fore": 260
+    },
+    "BrickWall.LiteBlue.TeeRight": {
+      "Fore": 261
+    },
+    "BrickWall.LiteBlue.TeeBottom": {
+      "Fore": 324
+    },
+
+    // LiteBlue floor
+    "BrickFloor.LiteBlue.TopLeft": {
+      "Fore": 768
+    },
+    "BrickFloor.LiteBlue.TopMiddle": {
+      "Fore": 769
+    },
+    "BrickFloor.LiteBlue.TopRight": {
+      "Fore": 770
+    },
+    "BrickFloor.LiteBlue.MiddleLeft": {
+      "Fore": 832
+    },
+    "BrickFloor.LiteBlue.Middle": {
+      "Fore": 833
+    },
+    "BrickFloor.LiteBlue.MiddleRight": {
+      "Fore": 834
+    },
+    "BrickFloor.LiteBlue.BottomLeft": {
+      "Fore": 896
+    },
+    "BrickFloor.LiteBlue.BottomMiddle": {
+      "Fore": 897
+    },
+    "BrickFloor.LiteBlue.BottomRight": {
+      "Fore": 898
+    },
+    "BrickFloor.LiteBlue.SingleTop": {
+      "Fore": 771
+    },
+    "BrickFloor.LiteBlue.SingleVertical": {
+      "Fore": 835
+    },
+    "BrickFloor.LiteBlue.SingleBottom": {
+      "Fore": 899
+    },
+    "BrickFloor.LiteBlue.SingleLeft": {
+      "Fore": 772
+    },
+    "BrickFloor.LiteBlue.SingleHorizontal": {
+      "Fore": 836
+    },
+    "BrickFloor.LiteBlue.SingleRight": {
+      "Fore": 900
+    },
+    "BrickFloor.LiteBlue.Single": {
+      "Fore": 837
+    },
+
+    // Gray floor
+    "BrickFloor.Gray.TopLeft": {
+      "Fore": 774
+    },
+    "BrickFloor.Gray.TopMiddle": {
+      "Fore": 775
+    },
+    "BrickFloor.Gray.TopRight": {
+      "Fore": 776
+    },
+    "BrickFloor.Gray.MiddleLeft": {
+      "Fore": 838
+    },
+    "BrickFloor.Gray.Middle": {
+      "Fore": 839
+    },
+    "BrickFloor.Gray.MiddleRight": {
+      "Fore": 840
+    },
+    "BrickFloor.Gray.BottomLeft": {
+      "Fore": 902
+    },
+    "BrickFloor.Gray.BottomMiddle": {
+      "Fore": 903
+    },
+    "BrickFloor.Gray.BottomRight": {
+      "Fore": 904
+    },
+    "BrickFloor.Gray.SingleTop": {
+      "Fore": 777
+    },
+    "BrickFloor.Gray.SingleVertical": {
+      "Fore": 841
+    },
+    "BrickFloor.Gray.SingleBottom": {
+      "Fore": 907
+    },
+    "BrickFloor.Gray.SingleLeft": {
+      "Fore": 778
+    },
+    "BrickFloor.Gray.SingleHorizontal": {
+      "Fore": 842
+    },
+    "BrickFloor.Gray.SingleRight": {
+      "Fore": 906
+    },
+    "BrickFloor.Gray.Single": {
+      "Fore": 843
+    },
+
+    // Animated pits (water, lava, etc.)
+    "BrickPit.CyanWater.TopLeft": {
+      "Animated": true,
+      "Fore": 1472,
+      "Back": 1478,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.TopMiddle": {
+      "Animated": true,
+      "Fore": 1473,
+      "Back": 1479,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.TopRight": {
+      "Animated": true,
+      "Fore": 1474,
+      "Back": 1480,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.MiddleLeft": {
+      "Animated": true,
+      "Fore": 1536,
+      "Back": 1542,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
     },
     "BrickPit.CyanWater.Middle": {
       "Animated": true,
-      "Fore": 1671,
-      "Back": 1677,
+      "Fore": 1537,
+      "Back": 1543,
       "ForeDuration": 500,
       "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.MiddleRight": {
+      "Animated": true,
+      "Fore": 1538,
+      "Back": 1544,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.BottomLeft": {
+      "Animated": true,
+      "Fore": 1600,
+      "Back": 1606,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.BottomMiddle": {
+      "Animated": true,
+      "Fore": 1601,
+      "Back": 1607,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.BottomRight": {
+      "Animated": true,
+      "Fore": 1602,
+      "Back": 1608,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.SingleTop": {
+      "Animated": true,
+      "Fore": 1475,
+      "Back": 1481,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.SingleMiddle": {
+      "Animated": true,
+      "Fore": 1539,
+      "Back": 1545,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.SingleBottom": {
+      "Animated": true,
+      "Fore": 1603,
+      "Back": 1609,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.OutBottomRight": {
+      "Animated": true,
+      "Fore": 1476,
+      "Back": 1482,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.OutBottomLeft": {
+      "Animated": true,
+      "Fore": 1477,
+      "Back": 1483,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.OutTopRight": {
+      "Animated": true,
+      "Fore": 1604,
+      "Back": 1610,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.OutTopLeft": {
+      "Animated": true,
+      "Fore": 1605,
+      "Back": 1611,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.TeeTop": {
+      "Animated": true,
+      "Fore": 1540,
+      "Back": 1546,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "BrickPit.CyanWater.TeeBottom": {
+      "Animated": true,
+      "Fore": 1541,
+      "Back": 1547,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+
+    // UI tiles
+    "UI.Yellow.Single": {
+      "Fore": 1916
+    },
+    "UI.Yellow.TopLeft": {
+      "Fore": 1917
+    },
+    "UI.Yellow.TopMiddle": {
+      "Fore": 1918
+    },
+    "UI.Yellow.TopRight": {
+      "Fore": 1919
+    },
+    "UI.Yellow.MiddleLeft": {
+      "Fore": 1981
+    },
+    "UI.Yellow.Middle": {
+      "Fore": 1982
+    },
+    "UI.Yellow.MiddleRight": {
+      "Fore": 1983
+    },
+    "UI.Yellow.BottomLeft": {
+      "Fore": 2045
+    },
+    "UI.Yellow.BottomMiddle": {
+      "Fore": 2046
+    },
+    "UI.Yellow.BottomRight": {
+      "Fore": 2047
     }
   }
 }
