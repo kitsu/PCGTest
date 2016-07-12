@@ -38,13 +38,18 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Display\MapView.cs" />
-    <Compile Include="Display\SpriteMap.cs" />
-    <Compile Include="Display\ViewManager.cs" />
-    <Compile Include="Display\Views.cs" />
+    <Compile Include="Director\GameManager.cs" />
+    <Compile Include="Director\MapViewController.cs" />
+    <Compile Include="Display\Interfaces.cs" />
+    <Compile Include="Display\MonoGame\MapView.cs" />
+    <Compile Include="Display\MonoGame\SpriteMap.cs" />
+    <Compile Include="Display\MonoGame\TileSolver.cs" />
+    <Compile Include="Display\MonoGame\ViewManager.cs" />
+    <Compile Include="Display\MonoGame\Views.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Geometry\Rect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -79,7 +84,6 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Director\" />
     <Folder Include="Simulation\" />
   </ItemGroup>
   <ItemGroup>

@@ -4,22 +4,25 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using PCGTest.Display;
 using System;
+using PCGTest.Display.MonoGame;
+using PCGTest.Director;
 
 namespace PCGTest
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class MonoGameSetup : Game
     {
         const int VIRTUAL_WIDTH = 800;
         const int VIRTUAL_HEIGHT = 480;
         RenderTarget2D VirtualTarget;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameManager gameMan;
         ViewManager viewMan;
 
-        public Game1()
+        public MonoGameSetup()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -33,7 +36,13 @@ namespace PCGTest
         /// </summary>
         protected override void Initialize()
         {
-            base.Initialize();
+            base.Initialize(); // base.Initialize calls LoadContent
+#if !__MOBILE__
+            // Show mouse cursor (should only happen when mouse attached...)
+            IsMouseVisible = true;
+#endif
+            // Create game manager (Could define startup config)
+            gameMan = new GameManager(viewMan);
             // Cap frame rate at 60hz
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);
             IsFixedTimeStep = true;
@@ -63,7 +72,7 @@ namespace PCGTest
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            viewMan = new ViewManager(GraphicsDevice);
+            viewMan = new ViewManager(GraphicsDevice, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
             viewMan.LoadContent(Content);
         }
 
@@ -86,7 +95,7 @@ namespace PCGTest
             base.Update(gameTime);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            viewMan.Update(gameTime);
+            viewMan.Update(gameTime.ElapsedGameTime.Milliseconds);
         }
 
         /// <summary>
@@ -99,7 +108,7 @@ namespace PCGTest
             // Virtual drawing block
             GraphicsDevice.SetRenderTarget(VirtualTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            viewMan.Draw(gameTime);
+            viewMan.Draw(gameTime.ElapsedGameTime.Milliseconds);
             GraphicsDevice.SetRenderTarget(null);
 
             // Draw to screen

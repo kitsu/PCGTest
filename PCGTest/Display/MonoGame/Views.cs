@@ -9,10 +9,4 @@ using System.Threading.Tasks;
 
 namespace PCGTest.Display
 {
-    interface IView
-    {
-        void Update(GameTime gameTime);
-        void Draw(GameTime gameTime);
-        void LoadContent(ContentManager content);
-    }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCGTest.Display
+namespace PCGTest.Display.MonoGame
 {
     public struct TileSprite
     {
@@ -15,7 +15,7 @@ namespace PCGTest.Display
         // Flipped indicates second frame is shown
         public bool Animated, Flipped;
         // How long to show each side in milliseconds
-        // and ellapsed time since last flip
+        // and elapsed time since last flip
         public int ForeDuration, TotalDuration, Ellapsed;
         // Front and back source rects
         public int Fore, Back;
@@ -45,9 +45,7 @@ namespace PCGTest.Display
     class SpriteMap
     {
         Texture2D _spriteMap;
-        int Width;
-        int Height;
-        int Size;
+        public readonly int Width, Height, Size;
         public Dictionary<int, Rectangle> _rectCache;
         public Dictionary<string, TileSprite> Sprites;
 
@@ -76,7 +74,7 @@ namespace PCGTest.Display
             _spriteMap = spriteMap;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(int elapsed)
         {
             TileSprite sprite;
             foreach (var key in Sprites.Keys.ToList())
@@ -84,7 +82,7 @@ namespace PCGTest.Display
                 sprite = Sprites[key];
                 if (sprite.Animated)
                 {
-                    sprite.Ellapsed += gameTime.ElapsedGameTime.Milliseconds;
+                    sprite.Ellapsed += elapsed;
                     if (sprite.Ellapsed > sprite.TotalDuration)
                     {
                         sprite.Flipped = false;
