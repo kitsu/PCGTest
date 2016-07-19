@@ -10,86 +10,67 @@ using Microsoft.Xna.Framework.Content;
 namespace PCGTest.Display.MonoGame
 {
 
-    class MapView: IView, IMapView
+    class MapView: BaseView, IMapView
     {
-        GraphicsDevice _screen;
-        SpriteBatch spriteBatch;
         SpriteMap mapSprites;
         SpriteMap decoSprites;
         SpriteMap itemSprites;
         SpriteMap charSprites;
+        TileProvider _tiles;
         Rectangle tileRect;
-        Dictionary<int, string> _tileKeys;
-        int[] _tileMap;
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Size { get; set; }
+        int[,] _tileMap;
 
-        public MapView(GraphicsDevice screen, int width, int height)
-        {
-            _screen = screen;
-            Width = width;
-            Height = height;
-            spriteBatch = new SpriteBatch(screen);
-            _tileKeys = new Dictionary<int, string>();
-        }
+        public MapView(GraphicsDevice screen, int width, int height):
+            base(screen, width, height) { }
 
-        public void LoadContent(object contentSource)
+        override public void LoadContent(object contentSource)
         {
-            var content = (ContentManager)contentSource;
-            mapSprites = SpriteMap.FromJson("Content/map.json");
-            mapSprites.SetSpriteMap(content.Load<Texture2D>("map"));
+            var assets = (AssetProvider)contentSource;
+            mapSprites = assets.GetMapSprites();
             Size = mapSprites.Size;
             // Convert width/height from pixels to tiles
             Width /= Size;
             Height /= Size;
             tileRect = new Rectangle(0, 0, Size, Size);
-            _tileMap = new int[Width * Height];
+            _tileMap = new int[Width, Height];
+            _tiles = new TileProvider();
         }
 
-        public void Update(int elapsed)
+        override public void Update(int elapsed)
         {
             mapSprites.Update(elapsed);
         }
 
-        public void Draw(int elapsed)
+        override public void Draw(int elapsed)
         {
             Rectangle dest = tileRect;
             string tile;
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
-            for (var i=0; i < _tileMap.Count(); i++)
+            for (var y = 0; y < Height; y++)
             {
-                tile = _tileKeys[_tileMap[i]];
-                dest.X = Size * (i % Width);
-                dest.Y = Size * (i / Width);
-                mapSprites.Draw(spriteBatch, tile, dest);
+                for (var x=0; x < Width; x++)
+                {
+                    tile = _tiles[_tileMap[x, y]];
+                    dest.X = Size * x;
+                    dest.Y = Size * y;
+                    mapSprites.Draw(spriteBatch, tile, dest);
+                }
             }
             spriteBatch.End();
         }
 
-        public void UpdateTileKeys(Dictionary<int, string> keys)
+        public void AddTileKey(KeyValuePair<int, string> key)
         {
-            foreach(var key in keys.Keys.Except(_tileKeys.Keys))
-            {
-                // FIXME convert tile type map into all tile variations
-                _tileKeys[key] = keys[key] + ".Middle";
-            }
-        }
-
-        public void AddTileKey(int key, string value)
-        {
-            _tileKeys[key] = value;
+            _tiles.AddTileType(key);
         }
 
         public void RemoveTileKey(int key)
         {
-
         }
 
-        public void UpdateMap(IEnumerable<int> map)
+        public void UpdateMap(int[,] map)
         {
-            // FIXME preprocess map with tile solver to expand tile variants
-            _tileMap = map.ToArray();
+            _tileMap = _tiles.Solve(map);
         }
     }
 }

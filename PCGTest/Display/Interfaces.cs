@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PCGTest.Director;
 
 namespace PCGTest.Display
 {
     public interface IView
     {
-        void Update(int ellapsed);
-        void Draw(int ellapsed);
+        void Update(int elapsed);
+        void Draw(int elapsed);
         void LoadContent(object contentSource);
     }
 
@@ -17,19 +18,19 @@ namespace PCGTest.Display
     {
         void Add(IView view);
         void Remove(IView view);
-        void Update(int ellapsed);
-        void Draw(int ellapsed);
+        void Update(int elapsed);
+        void Draw(int elapsed);
         void LoadContent(object contentSource);
-        IMapView CreateMapView();
+        IView CreateTitleView(TitleViewController mapCtrl);
+        IView CreateMapView(MapViewController mapCtrl);
     }
 
     public interface IMapView
     {
         int Width { get; }
         int Height { get; }
-        void UpdateTileKeys(Dictionary<int, string> keys);
-        void AddTileKey(int key, string value);
+        void UpdateMap(int[,] map);
+        void AddTileKey(KeyValuePair<int, string> key);
         void RemoveTileKey(int key);
-        void UpdateMap(IEnumerable<int> map);
     }
 }

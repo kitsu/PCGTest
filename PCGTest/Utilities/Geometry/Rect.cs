@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,6 +31,21 @@ namespace PCGTest.Utilities.Geometry
         {
             get { return emptyRect; }
         }
+
+        public Vector2 Center
+        {
+            get
+            {
+                return new Vector2(X + Width/2, Y + Height/2);
+            }
+
+            set
+            {
+                X = (int)value.X - Width/2;
+                Y = (int)value.Y - Height/2;
+            }
+        }
+
         public bool Equals(Rect other)
         {
             return this == other;

@@ -36,13 +36,7 @@ namespace PCGTest
         /// </summary>
         protected override void Initialize()
         {
-            base.Initialize(); // base.Initialize calls LoadContent
-#if !__MOBILE__
-            // Show mouse cursor (should only happen when mouse attached...)
-            IsMouseVisible = true;
-#endif
-            // Create game manager (Could define startup config)
-            gameMan = new GameManager(viewMan);
+            TouchPanel.EnabledGestures = GestureType.Tap | GestureType.DoubleTap;
             // Cap frame rate at 60hz
             TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);
             IsFixedTimeStep = true;
@@ -61,6 +55,13 @@ namespace PCGTest
             TouchPanel.EnableMouseTouchPoint = true;
             // Reposition window
             Window.Position = new Point(0, 0);
+            base.Initialize(); // base.Initialize calls LoadContent
+            // Create game manager (Could define startup config)
+            gameMan = new GameManager(viewMan);
+#if !__MOBILE__
+            // Show mouse cursor (should only happen when mouse attached...)
+            IsMouseVisible = true;
+#endif
         }
 
         /// <summary>

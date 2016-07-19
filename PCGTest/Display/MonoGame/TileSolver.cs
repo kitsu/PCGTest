@@ -8,7 +8,5 @@ namespace PCGTest.Display.MonoGame
 {
     class TileSolver
     {
-        /* Identify tiles that should connect and pick tile variants 
-         * based on neighboring tiles. */
     }
 }

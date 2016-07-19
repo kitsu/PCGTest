@@ -49,7 +49,7 @@ namespace PCGTest.Display.MonoGame
         public Dictionary<int, Rectangle> _rectCache;
         public Dictionary<string, TileSprite> Sprites;
 
-        public static SpriteMap FromJson(string filename)
+        public static SpriteMap FromJson(string filename, Texture2D image)
         {
             string json;
             using (var stream = TitleContainer.OpenStream(filename))
@@ -58,6 +58,7 @@ namespace PCGTest.Display.MonoGame
                 json = sreader.ReadToEnd();
             }
             var spriteMap = JsonConvert.DeserializeObject<SpriteMap>(json);
+            spriteMap.SetSpriteMap(image);
             return spriteMap;
         }
 
@@ -69,7 +70,7 @@ namespace PCGTest.Display.MonoGame
             _rectCache = new Dictionary<int, Rectangle>();
             Sprites = new Dictionary<string, TileSprite>();
         }
-        public void SetSpriteMap(Texture2D spriteMap)
+        void SetSpriteMap(Texture2D spriteMap)
         {
             _spriteMap = spriteMap;
         }

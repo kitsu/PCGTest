@@ -8,43 +8,46 @@ using PCGTest.Utilities.Geometry;
 
 namespace PCGTest.Director
 {
-    class GameManager
+    public class GameManager
     {
         IViewManager _viewMan;
-        IMapView mapView;
-        MapViewController mapCtrl;
+        Dictionary<IDisposable, IView> CVPairs;
 
         public GameManager(IViewManager viewMan)
         {
             _viewMan = viewMan;
-            ShowStartScreen();
+            CVPairs = new Dictionary<IDisposable, IView>();
+            CreateTitleView();
         }
 
         /// <summary>
         /// Initialize a title screen pair
         /// </summary>
-        void ShowStartScreen()
+        public void CreateTitleView()
         {
-            // FIXME create title screen with start menu
-            CreateMapView();
+            var ctrl = new TitleViewController(this);
+            var view = _viewMan.CreateTitleView(ctrl);
+            CVPairs[ctrl] = view;
         }
 
         /// <summary>
         /// Initialize a game map pair
         /// </summary>
-        void CreateMapView()
+        public void CreateMapView()
         {
             // Setup map view and controller
-            mapView = _viewMan.CreateMapView();
-            mapCtrl = new MapViewController();
-            var vp = mapCtrl.AddViewport(new Rect(0, 0, mapView.Width, mapView.Height));
-            // Bind events
-            mapCtrl.UpdateTileKeys += mapView.UpdateTileKeys;
-            mapCtrl.AddTileKey += mapView.AddTileKey;
-            mapCtrl.RemoveTileKey += mapView.RemoveTileKey;
-            vp.UpdateMap += mapView.UpdateMap;
+            var ctrl = new MapViewController(this);
+            var view = _viewMan.CreateMapView(ctrl);
             // Initialize map
-            mapCtrl.Initialize();
+            ctrl.Initialize();
+            CVPairs[ctrl] = view;
+        }
+
+        public void Remove(IDisposable ctrl)
+        {
+            var view = CVPairs[ctrl];
+            _viewMan.Remove(view);
+            CVPairs.Remove(ctrl);
         }
     }
 }

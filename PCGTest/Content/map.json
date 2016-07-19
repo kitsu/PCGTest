@@ -54,320 +54,320 @@
     },
 
     // Smooth walls
-    "SmoothWall.LiteBlue.TopLeft": {
+    "Wall.Smooth.LiteBlue.TopLeft": {
       "Fore": 0
     },
-    "SmoothWall.LiteBlue.Horizontal": {
+    "Wall.Smooth.LiteBlue.Horizontal": {
       "Fore": 1
     },
-    "SmoothWall.LiteBlue.TopRight": {
+    "Wall.Smooth.LiteBlue.TopRight": {
       "Fore": 2
     },
-    "SmoothWall.LiteBlue.Vertical": {
+    "Wall.Smooth.LiteBlue.Vertical": {
       "Fore": 64
     },
-    "SmoothWall.LiteBlue.TopCap": {
+    "Wall.Smooth.LiteBlue.TopCap": {
       "Fore": 65
     },
-    "SmoothWall.LiteBlue.MiddleRight": {
+    "Wall.Smooth.LiteBlue.MiddleRight": {
       "Fore": 66
     },
-    "SmoothWall.LiteBlue.BottomLeft": {
+    "Wall.Smooth.LiteBlue.BottomLeft": {
       "Fore": 128
     },
-    "SmoothWall.LiteBlue.BottomCap": {
+    "Wall.Smooth.LiteBlue.BottomCap": {
       "Fore": 129
     },
-    "SmoothWall.LiteBlue.BottomRight": {
+    "Wall.Smooth.LiteBlue.BottomRight": {
       "Fore": 130
     },
-    "SmoothWall.LiteBlue.Field": {
+    "Wall.Smooth.LiteBlue.Field": {
       "Fore": 4
     },
-    "SmoothWall.LiteBlue.TeeTop": {
+    "Wall.Smooth.LiteBlue.TeeTop": {
       "Fore": 5
     },
-    "SmoothWall.LiteBlue.TeeLeft": {
+    "Wall.Smooth.LiteBlue.TeeLeft": {
       "Fore": 67
     },
-    "SmoothWall.LiteBlue.Cross": {
+    "Wall.Smooth.LiteBlue.Cross": {
       "Fore": 68
     },
-    "SmoothWall.LiteBlue.TeeRight": {
+    "Wall.Smooth.LiteBlue.TeeRight": {
       "Fore": 69
     },
-    "SmoothWall.LiteBlue.TeeBottom": {
+    "Wall.Smooth.LiteBlue.TeeBottom": {
       "Fore": 132
     },
 
     // Brick walls
-    "BrickWall.LiteBlue.TopLeft": {
+    "Wall.Brick.LiteBlue.TopLeft": {
       "Fore": 192
     },
-    "BrickWall.LiteBlue.Horizontal": {
+    "Wall.Brick.LiteBlue.Horizontal": {
       "Fore": 193
     },
-    "BrickWall.LiteBlue.TopRight": {
+    "Wall.Brick.LiteBlue.TopRight": {
       "Fore": 194
     },
-    "BrickWall.LiteBlue.Vertical": {
+    "Wall.Brick.LiteBlue.Vertical": {
       "Fore": 256
     },
-    "BrickWall.LiteBlue.TopCap": {
+    "Wall.Brick.LiteBlue.TopCap": {
       "Fore": 257
     },
-    "BrickWall.LiteBlue.MiddleRight": {
+    "Wall.Brick.LiteBlue.MiddleRight": {
       "Fore": 258
     },
-    "BrickWall.LiteBlue.BottomLeft": {
+    "Wall.Brick.LiteBlue.BottomLeft": {
       "Fore": 320
     },
-    "BrickWall.LiteBlue.BottomCap": {
+    "Wall.Brick.LiteBlue.BottomCap": {
       "Fore": 321
     },
-    "BrickWall.LiteBlue.BottomRight": {
+    "Wall.Brick.LiteBlue.BottomRight": {
       "Fore": 322
     },
-    "BrickWall.LiteBlue.Field": {
+    "Wall.Brick.LiteBlue.Field": {
+      "Fore": 195
+    },
+    "Wall.Brick.LiteBlue.TeeTop": {
       "Fore": 196
     },
-    "BrickWall.LiteBlue.TeeTop": {
-      "Fore": 197
-    },
-    "BrickWall.LiteBlue.TeeLeft": {
+    "Wall.Brick.LiteBlue.TeeLeft": {
       "Fore": 259
     },
-    "BrickWall.LiteBlue.Cross": {
+    "Wall.Brick.LiteBlue.Cross": {
       "Fore": 260
     },
-    "BrickWall.LiteBlue.TeeRight": {
+    "Wall.Brick.LiteBlue.TeeRight": {
       "Fore": 261
     },
-    "BrickWall.LiteBlue.TeeBottom": {
+    "Wall.Brick.LiteBlue.TeeBottom": {
       "Fore": 324
     },
 
     // LiteBlue floor
-    "BrickFloor.LiteBlue.TopLeft": {
+    "Floor.Brick.LiteBlue.TopLeft": {
       "Fore": 768
     },
-    "BrickFloor.LiteBlue.TopMiddle": {
+    "Floor.Brick.LiteBlue.TopMiddle": {
       "Fore": 769
     },
-    "BrickFloor.LiteBlue.TopRight": {
+    "Floor.Brick.LiteBlue.TopRight": {
       "Fore": 770
     },
-    "BrickFloor.LiteBlue.MiddleLeft": {
+    "Floor.Brick.LiteBlue.MiddleLeft": {
       "Fore": 832
     },
-    "BrickFloor.LiteBlue.Middle": {
+    "Floor.Brick.LiteBlue.Middle": {
       "Fore": 833
     },
-    "BrickFloor.LiteBlue.MiddleRight": {
+    "Floor.Brick.LiteBlue.MiddleRight": {
       "Fore": 834
     },
-    "BrickFloor.LiteBlue.BottomLeft": {
+    "Floor.Brick.LiteBlue.BottomLeft": {
       "Fore": 896
     },
-    "BrickFloor.LiteBlue.BottomMiddle": {
+    "Floor.Brick.LiteBlue.BottomMiddle": {
       "Fore": 897
     },
-    "BrickFloor.LiteBlue.BottomRight": {
+    "Floor.Brick.LiteBlue.BottomRight": {
       "Fore": 898
     },
-    "BrickFloor.LiteBlue.SingleTop": {
+    "Floor.Brick.LiteBlue.SingleTop": {
       "Fore": 771
     },
-    "BrickFloor.LiteBlue.SingleVertical": {
+    "Floor.Brick.LiteBlue.SingleVertical": {
       "Fore": 835
     },
-    "BrickFloor.LiteBlue.SingleBottom": {
+    "Floor.Brick.LiteBlue.SingleBottom": {
       "Fore": 899
     },
-    "BrickFloor.LiteBlue.SingleLeft": {
+    "Floor.Brick.LiteBlue.SingleLeft": {
       "Fore": 772
     },
-    "BrickFloor.LiteBlue.SingleHorizontal": {
+    "Floor.Brick.LiteBlue.SingleHorizontal": {
       "Fore": 836
     },
-    "BrickFloor.LiteBlue.SingleRight": {
+    "Floor.Brick.LiteBlue.SingleRight": {
       "Fore": 900
     },
-    "BrickFloor.LiteBlue.Single": {
+    "Floor.Brick.LiteBlue.Single": {
       "Fore": 837
     },
 
     // Gray floor
-    "BrickFloor.Gray.TopLeft": {
+    "Floor.Brick.Gray.TopLeft": {
       "Fore": 774
     },
-    "BrickFloor.Gray.TopMiddle": {
+    "Floor.Brick.Gray.TopMiddle": {
       "Fore": 775
     },
-    "BrickFloor.Gray.TopRight": {
+    "Floor.Brick.Gray.TopRight": {
       "Fore": 776
     },
-    "BrickFloor.Gray.MiddleLeft": {
+    "Floor.Brick.Gray.MiddleLeft": {
       "Fore": 838
     },
-    "BrickFloor.Gray.Middle": {
+    "Floor.Brick.Gray.Middle": {
       "Fore": 839
     },
-    "BrickFloor.Gray.MiddleRight": {
+    "Floor.Brick.Gray.MiddleRight": {
       "Fore": 840
     },
-    "BrickFloor.Gray.BottomLeft": {
+    "Floor.Brick.Gray.BottomLeft": {
       "Fore": 902
     },
-    "BrickFloor.Gray.BottomMiddle": {
+    "Floor.Brick.Gray.BottomMiddle": {
       "Fore": 903
     },
-    "BrickFloor.Gray.BottomRight": {
+    "Floor.Brick.Gray.BottomRight": {
       "Fore": 904
     },
-    "BrickFloor.Gray.SingleTop": {
+    "Floor.Brick.Gray.SingleTop": {
       "Fore": 777
     },
-    "BrickFloor.Gray.SingleVertical": {
+    "Floor.Brick.Gray.SingleVertical": {
       "Fore": 841
     },
-    "BrickFloor.Gray.SingleBottom": {
+    "Floor.Brick.Gray.SingleBottom": {
       "Fore": 907
     },
-    "BrickFloor.Gray.SingleLeft": {
+    "Floor.Brick.Gray.SingleLeft": {
       "Fore": 778
     },
-    "BrickFloor.Gray.SingleHorizontal": {
+    "Floor.Brick.Gray.SingleHorizontal": {
       "Fore": 842
     },
-    "BrickFloor.Gray.SingleRight": {
+    "Floor.Brick.Gray.SingleRight": {
       "Fore": 906
     },
-    "BrickFloor.Gray.Single": {
+    "Floor.Brick.Gray.Single": {
       "Fore": 843
     },
 
     // Animated pits (water, lava, etc.)
-    "BrickPit.CyanWater.TopLeft": {
+    "Pit.Brick.CyanWater.TopLeft": {
       "Animated": true,
       "Fore": 1472,
       "Back": 1478,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.TopMiddle": {
+    "Pit.Brick.CyanWater.TopMiddle": {
       "Animated": true,
       "Fore": 1473,
       "Back": 1479,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.TopRight": {
+    "Pit.Brick.CyanWater.TopRight": {
       "Animated": true,
       "Fore": 1474,
       "Back": 1480,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.MiddleLeft": {
+    "Pit.Brick.CyanWater.MiddleLeft": {
       "Animated": true,
       "Fore": 1536,
       "Back": 1542,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.Middle": {
+    "Pit.Brick.CyanWater.Middle": {
       "Animated": true,
       "Fore": 1537,
       "Back": 1543,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.MiddleRight": {
+    "Pit.Brick.CyanWater.MiddleRight": {
       "Animated": true,
       "Fore": 1538,
       "Back": 1544,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.BottomLeft": {
+    "Pit.Brick.CyanWater.BottomLeft": {
       "Animated": true,
       "Fore": 1600,
       "Back": 1606,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.BottomMiddle": {
+    "Pit.Brick.CyanWater.BottomMiddle": {
       "Animated": true,
       "Fore": 1601,
       "Back": 1607,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.BottomRight": {
+    "Pit.Brick.CyanWater.BottomRight": {
       "Animated": true,
       "Fore": 1602,
       "Back": 1608,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.SingleTop": {
+    "Pit.Brick.CyanWater.SingleTop": {
       "Animated": true,
       "Fore": 1475,
       "Back": 1481,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.SingleMiddle": {
+    "Pit.Brick.CyanWater.SingleMiddle": {
       "Animated": true,
       "Fore": 1539,
       "Back": 1545,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.SingleBottom": {
+    "Pit.Brick.CyanWater.SingleBottom": {
       "Animated": true,
       "Fore": 1603,
       "Back": 1609,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.OutBottomRight": {
+    "Pit.Brick.CyanWater.OutBottomRight": {
       "Animated": true,
       "Fore": 1476,
       "Back": 1482,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.OutBottomLeft": {
+    "Pit.Brick.CyanWater.OutBottomLeft": {
       "Animated": true,
       "Fore": 1477,
       "Back": 1483,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.OutTopRight": {
+    "Pit.Brick.CyanWater.OutTopRight": {
       "Animated": true,
       "Fore": 1604,
       "Back": 1610,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.OutTopLeft": {
+    "Pit.Brick.CyanWater.OutTopLeft": {
       "Animated": true,
       "Fore": 1605,
       "Back": 1611,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.TeeTop": {
+    "Pit.Brick.CyanWater.TeeTop": {
       "Animated": true,
       "Fore": 1540,
       "Back": 1546,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "BrickPit.CyanWater.TeeBottom": {
+    "Pit.Brick.CyanWater.TeeBottom": {
       "Animated": true,
       "Fore": 1541,
       "Back": 1547,
