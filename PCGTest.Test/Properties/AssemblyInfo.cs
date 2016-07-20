@@ -5,15 +5,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PCGTest")]
-[assembly: AssemblyProduct("PCGTest")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyTitle("PCGTest.Test")]
 [assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("PCGTest.Test")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: InternalsVisibleTo("PCGTest.Test")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a9339b0b-a888-4015-a2a2-59c79d3f8fa1")]
+[assembly: Guid("1c177287-4ac5-4d3f-ac10-dac24c89dbbd")]
 
 // Version information for an assembly consists of the following four values:
 //

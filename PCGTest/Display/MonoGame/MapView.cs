@@ -70,7 +70,7 @@ namespace PCGTest.Display.MonoGame
 
         public void UpdateMap(int[,] map)
         {
-            _tileMap = _tiles.Solve(map);
+            _tileMap = _tiles.ResolveMap(map);
         }
     }
 }

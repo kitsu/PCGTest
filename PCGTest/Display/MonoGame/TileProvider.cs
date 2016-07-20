@@ -280,22 +280,22 @@ namespace PCGTest.Display.MonoGame
                     new[] { 80, 81, 84, 85, 112, 113, 116, 117, 223 }},
         };
 
-        static bool IsBorder(int x, int y, int[,] map)
+        public static bool IsBorder(int x, int y, int[,] map)
         {
             int width = map.GetLength(0);
             int height = map.GetLength(1);
             return x == 0 || y == 0 || x == width - 1 || y == height - 1;
         }
 
-        static int CalculateNeighborhood(int x, int y, int[,] map)
+        public static int CalculateNeighborhood(int x, int y, int[,] map)
         {
             var tile = map[x, y];
-            int bit, bits = 0;
+            int bits = 0;
             foreach (var pair in offsets)
             {
                 bits <<= 1;
-                bit = map[x + pair.Item1, y + pair.Item2] == tile ? 1 : 0;
-                bits += bit;
+                if (map[x + pair.Item1, y + pair.Item2] == tile)
+                    bits += 1;
             }
             return bits;
         }
@@ -322,19 +322,15 @@ namespace PCGTest.Display.MonoGame
     public class TileProvider
     {
         Dictionary<int, string> _tileKeys;
+        public readonly int _shift;
 
-        public TileProvider()
+        public TileProvider(int shift = 8)
         {
             _tileKeys = new Dictionary<int, string>();
+            _shift = shift;
         }
 
-        public string this[int key]
-        {
-            get
-            {
-                return _tileKeys[key];
-            }
-        }
+        public string this[int key] => _tileKeys[key];
 
         /// <summary>
         /// Given a base tile key expand it to all
@@ -344,29 +340,29 @@ namespace PCGTest.Display.MonoGame
         public void AddTileType(KeyValuePair<int, string> tileKey)
         {
             // Always add tileKey
-            _tileKeys[tileKey.Key << 8] = tileKey.Value;
+            _tileKeys[tileKey.Key << _shift] = tileKey.Value;
             // Look up key in map of keys to <offset, suffix> pairs
             var expansion = GetExpansionData(tileKey.Value);
             foreach (var pair in expansion)
             {
                 // Add each (key << 8) + offset = value + suffix to tileKeys
-                _tileKeys[(tileKey.Key << 8) + pair.Key] =
+                _tileKeys[(tileKey.Key << _shift) + pair.Key] =
                     $"{tileKey.Value}.{pair.Value}";
             }
         }
 
-        static KeyValuePair<int, string>[] GetExpansionData(string key)
+        public static KeyValuePair<int, string>[] GetExpansionData(string key)
         {
-            var kind = key.Split('.').First();
+            var kind = key.Split('.').First().ToLower();
             switch (kind)
             {
-                case "Wall":
+                case "wall":
                     return TileExpansions.Wall;
-                case "Floor":
+                case "floor":
                     return TileExpansions.Floor;
-                case "Pit":
+                case "pit":
                     return TileExpansions.Pit;
-                case "UI":
+                case "ui":
                     return TileExpansions.UI;
             }
             return new KeyValuePair<int, string>[0];
@@ -374,20 +370,20 @@ namespace PCGTest.Display.MonoGame
 
         int PickTile(int key, TileType variation)
         {
-            var kind = _tileKeys[key].Split('.').First();
+            var kind = _tileKeys[key].Split('.').First().ToLower();
             int offset = 0;
             switch (kind)
             {
-                case "Wall":
+                case "wall":
                     offset = TileExpansions.WallKinds[variation];
                     break;
-                case "Floor":
+                case "floor":
                     offset = TileExpansions.FloorKinds[variation];
                     break;
-                case "Pit":
+                case "pit":
                     offset = TileExpansions.PitKinds[variation];
                     break;
-                case "UI":
+                case "ui":
                     offset = TileExpansions.UIKinds[variation];
                     break;
             }
@@ -399,7 +395,7 @@ namespace PCGTest.Display.MonoGame
         /// </summary>
         /// <param name="map">2D Int array of map tile type keys.</param>
         /// <returns></returns>
-        public int[,] Solve(int[,] map)
+        public int[,] ResolveMap(int[,] map)
         {
             TileType variation;
             int id, shifted;
@@ -411,7 +407,7 @@ namespace PCGTest.Display.MonoGame
                 for (var x = 0; x < width; x++)
                 {
                     id = map[x, y];
-                    shifted = id << 8;
+                    shifted = id << _shift;
                     if (!_tileKeys.ContainsKey(shifted))
                     {
                         // Substitute solid black for missing tiles
