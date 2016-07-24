@@ -17,10 +17,24 @@ namespace PCGTest.Utilities.Geometry
 
         public Rect(int x, int y, int width, int height)
         {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
+            if (width < 0)
+            {
+                X = width;
+                Width = -width;
+            } else
+            {
+                X = x;
+                Width = width;
+            }
+            if (height < 0)
+            {
+                Y = height;
+                Height = -height;
+            } else
+            {
+                Y = y;
+                Height = height;
+            }
         }
 
         public int Left => X;
@@ -68,6 +82,17 @@ namespace PCGTest.Utilities.Geometry
                    Left <= other.Right &&
                    other.Top <= Bottom &&
                    Top <= other.Bottom;
+        }
+
+        public Rect Intersection(Rect other)
+        {
+            if (!Intersects(other))
+                return EmptyRect;
+            var left = Math.Max(Left, other.Left);
+            var top = Math.Max(Top, other.Top);
+            var right = Math.Min(Right, other.Right);
+            var bottom = Math.Min(Bottom, other.Bottom);
+            return new Rect(left, top, right - left, bottom - top);
         }
 
         public bool Equals(Rect other)
