@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PCGTest.Utilities.Geometry
 {
@@ -19,7 +20,7 @@ namespace PCGTest.Utilities.Geometry
         {
             if (width < 0)
             {
-                X = width;
+                X = x + width;
                 Width = -width;
             } else
             {
@@ -28,7 +29,7 @@ namespace PCGTest.Utilities.Geometry
             }
             if (height < 0)
             {
-                Y = height;
+                Y = y + height;
                 Height = -height;
             } else
             {
@@ -93,6 +94,17 @@ namespace PCGTest.Utilities.Geometry
             var right = Math.Min(Right, other.Right);
             var bottom = Math.Min(Bottom, other.Bottom);
             return new Rect(left, top, right - left, bottom - top);
+        }
+
+        public IEnumerable<Vector> Coordinates()
+        {
+            for (var y = Y; y < Bottom; y++)
+            {
+                for (var x = X; x < Right; x++)
+                {
+                    yield return new Vector(x, y);
+                }
+            }
         }
 
         public bool Equals(Rect other)

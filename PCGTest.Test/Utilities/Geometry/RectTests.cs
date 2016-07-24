@@ -2,6 +2,8 @@
 using PCGTest.Utilities.Geometry;
 using NUnit.Framework;
 using FluentAssertions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PCGTest.Test.Utilities.Geometry
 {
@@ -146,6 +148,39 @@ namespace PCGTest.Test.Utilities.Geometry
             expect = Rect.UnitRect;
             res = r1.Intersection(r2);
             res.Should().Be(expect, "because 1xN and Nx1 overlap at 0->1");
+        }
+
+        [Test]
+        public void Rect_Enumeration_Yields_TopLeft_Coords()
+        {
+            Rect r;
+            List<Vector> res;
+            // Normal rect
+            r = new Rect(1, 2, 3, 4);
+            res = r.Coordinates().ToList();
+            res.Should().NotBeEmpty($"because {r} has a non-zero area");
+            res.Should().HaveCount(3 * 4, "because there is one coordinate per unit area");
+            res.Should().OnlyHaveUniqueItems("because each coord occurs once");
+            res.Should().Contain(r.TopLeft, $"because {r.TopLeft}");
+            res.Should().Contain(new Vector(r.Right - 1, r.Top),
+                $"because {r.Width}");
+            res.Should().Contain(new Vector(r.Left, r.Bottom - 1),
+                $"because {r.Height}");
+            res.Should().Contain(new Vector(r.Right - 1, r.Bottom - 1),
+                $"because {r.BottomRight}");
+            // Reverse rect
+            r = new Rect(-4, -3, -2, -1);
+            res = r.Coordinates().ToList();
+            res.Should().NotBeEmpty($"because {r} has a non-zero area");
+            res.Should().HaveCount(2 * 1, "because there is one coordinate per unit area");
+            res.Should().OnlyHaveUniqueItems("because each coord occurs once");
+            res.Should().Contain(r.TopLeft, $"because {r.TopLeft}");
+            res.Should().Contain(new Vector(r.Right - 1, r.Top),
+                $"because {r.Width}");
+            res.Should().Contain(new Vector(r.Left, r.Bottom - 1),
+                $"because {r.Height}");
+            res.Should().Contain(new Vector(r.Right - 1, r.Bottom - 1),
+                $"because {r.BottomRight}");
         }
 
         [Test]
