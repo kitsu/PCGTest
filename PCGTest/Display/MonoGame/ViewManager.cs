@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using PCGTest.Director;
 using PCGTest.Utilities.Geometry;
+using System.Reactive.Linq;
 
 namespace PCGTest.Display.MonoGame
 {
@@ -49,7 +50,11 @@ namespace PCGTest.Display.MonoGame
             var vp = ctrl.AddViewport(new Rect(0, 0, view.Width, view.Height));
             // Bind events
             ctrl.WhenAddTileKey.Subscribe(view.AddTileKey);
-            vp.WhenMap.Subscribe(view.UpdateMap);
+            ctrl.Initialize();
+            vp.WhenMapChanges
+                .Throttle(new TimeSpan((1/60)*1000))
+                .Subscribe(view.UpdateMap);
+            vp.Initialize();
             return view;
         }
 

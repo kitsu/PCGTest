@@ -5,6 +5,8 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
+using PCGTest.Simulation;
+using PCGTest.Simulation.Map;
 using PCGTest.Utilities.Geometry;
 
 namespace PCGTest.Director
@@ -31,14 +33,22 @@ namespace PCGTest.Director
             _subTileKey = new Subject<int>();
             WhenSubTileKey = _subTileKey.AsObservable();
             Viewports = new List<Viewport>();
+
+            // Register for sim map notifications
+            parent.SimMan.WhenCellUpdates.Subscribe(CellUpdate);
         }
 
 
         public Viewport AddViewport(Rect rect)
         {
-            var view = new Viewport(rect);
+            var view = new Viewport(_parent.SimMan, rect);
             Viewports.Add(view);
             return view;
+        }
+
+        public void CellUpdate(KeyValuePair<Vector, Cell> pair)
+        {
+            //pass
         }
 
         public void Initialize()
@@ -52,48 +62,6 @@ namespace PCGTest.Director
             foreach (var key in keys)
             {
                 _addTileKey.OnNext(key);
-            }
-            //OnUpdateTileKeys(keys);
-            // Create fake data and feed it to the viewports
-            int[,] map;
-            foreach (var vp in Viewports)
-            {
-                int tile;
-                var bounds = vp.Bounds;
-                var qheight = bounds.Height / 4;
-                var qwidth = bounds.Width / 4;
-                map = new int[bounds.Width,bounds.Height];
-                // Set inner half of map to brick
-                for (var y = 0; y < bounds.Height; y++)
-                {
-                    for (var x = 0; x < bounds.Width; x++)
-                    {
-                        if (x >= qwidth && x <= 3 * qwidth &&
-                            y >= qheight && y <= 3 * qheight)
-                        {
-                            // Island in middle
-                            if ((x == qwidth + 3 || x == (3 * qwidth) - 3) &&
-                                (y >= qheight + 3 && y <= (3 * qheight) - 3))
-                            {
-                                // Wall offset 3 from shore
-                                tile = 3;
-                            } else if ((x >= qwidth + 3 && x <= (3 * qwidth) - 3) &&
-                                (y == qheight + 3 || y == (3 * qheight) - 3))
-                            {
-                                // Wall offset 3 from shore
-                                tile = 3;
-                            } else
-                            {
-                                tile = 2;
-                            }
-                        } else
-                        {
-                            tile = 1;
-                        }
-                            map[x, y] = tile;
-                    }
-                }
-                vp.Initialize(map);
             }
         }
 
@@ -111,24 +79,68 @@ namespace PCGTest.Director
     public class Viewport: IDisposable
     {
         public Rect Bounds;
-        private readonly Subject<int[,]> _map;
-        public IObservable<int[,]> WhenMap;
+        SimulationManager _sim;
+        // Streams
+        private readonly Subject<KeyValuePair<int, string>> _addTileKey;
+        public IObservable<KeyValuePair<int, string>> WhenAddTileKey;
+        private readonly Subject<int> _subTileKey;
+        public IObservable<int> WhenSubTileKey;
+        private readonly Subject<int[,]> _mapChange;
+        public IObservable<int[,]> WhenMapChanges;
+        // State
+        int[,] _tiles;
+        Dictionary<int, string> _tileKeys;
 
-        public Viewport(Rect rect)
+        public Viewport(SimulationManager sim, Rect rect)
         {
             Bounds = rect;
-            _map = new Subject<int[,]>();
-            WhenMap = _map.AsObservable();
+            _sim = sim;
+            _tiles = new int[rect.Width, rect.Height];
+            _tileKeys = new Dictionary<int, string>();
+            // Setup streams
+            _addTileKey = new Subject<KeyValuePair<int, string>>();
+            WhenAddTileKey = _addTileKey.AsObservable();
+            _subTileKey = new Subject<int>();
+            WhenSubTileKey = _subTileKey.AsObservable();
+            _mapChange = new Subject<int[,]>();
+            WhenMapChanges = _mapChange.AsObservable();
+            // Register for chunk events
+            sim.WhenCellUpdates.Subscribe(CellUpdated);
         }
 
-        public void Initialize(int[,] map)
+        public void Initialize()
         {
-            _map.OnNext(map);
+            // Trigger chunk load/touch
+            _sim.LoadArea(Bounds);
+        }
+
+        public void CellUpdated(KeyValuePair<Vector, Cell> cell)
+        {
+            if (Bounds.Contains(cell.Key))
+            {
+                // Ensure tile key is registered
+                // Notify tile update
+                var coord = cell.Key - Bounds.TopLeft;
+                //FIXME: Convert from cell data to tile key
+                int tile;
+                if (cell.Value.Fill == "")
+                {
+                    tile = cell.Value.Floor == "Water" ? 1 : 2;
+                } else
+                {
+                    tile = 3;
+                }
+                if (_tiles[coord.X, coord.Y] != tile)
+                {
+                    _tiles[coord.X, coord.Y] = tile;
+                    _mapChange.OnNext(_tiles);
+                }
+            }
         }
 
         public void Dispose()
         {
-            _map.OnCompleted();
+            _mapChange.OnCompleted();
         }
     }
 }

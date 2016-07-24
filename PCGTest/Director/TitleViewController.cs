@@ -24,6 +24,8 @@ namespace PCGTest.Director
         {
             // Transition to selected state
             _parent.Remove(this);
+            // This code is for when start/load are picked
+            _parent.StartSim();
             _parent.CreateMapView();
         }
 

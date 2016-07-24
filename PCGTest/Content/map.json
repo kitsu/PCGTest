@@ -232,7 +232,7 @@
       "Fore": 841
     },
     "Floor.Brick.Gray.SingleBottom": {
-      "Fore": 907
+      "Fore": 905
     },
     "Floor.Brick.Gray.SingleLeft": {
       "Fore": 778
@@ -318,7 +318,7 @@
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.SingleMiddle": {
+    "Pit.Brick.CyanWater.SingleVertical": {
       "Animated": true,
       "Fore": 1539,
       "Back": 1545,

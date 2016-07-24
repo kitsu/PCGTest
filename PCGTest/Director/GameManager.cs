@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PCGTest.Display;
+using PCGTest.Simulation;
 using PCGTest.Utilities.Geometry;
 
 namespace PCGTest.Director
@@ -12,6 +13,7 @@ namespace PCGTest.Director
     {
         IViewManager _viewMan;
         Dictionary<IDisposable, IView> CVPairs;
+        public SimulationManager SimMan;
 
         public GameManager(IViewManager viewMan)
         {
@@ -38,8 +40,6 @@ namespace PCGTest.Director
             // Setup map view and controller
             var ctrl = new MapViewController(this);
             var view = _viewMan.CreateMapView(ctrl);
-            // Initialize map
-            ctrl.Initialize();
             CVPairs[ctrl] = view;
         }
 
@@ -48,6 +48,11 @@ namespace PCGTest.Director
             var view = CVPairs[ctrl];
             _viewMan.Remove(view);
             CVPairs.Remove(ctrl);
+        }
+
+        public void StartSim()
+        {
+            SimMan = new SimulationManager((int)DateTime.Now.Ticks);
         }
     }
 }

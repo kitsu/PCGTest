@@ -65,8 +65,8 @@ namespace PCGTest.Utilities.Geometry
         public bool Contains(Vector coord) => Contains(coord.X, coord.Y);
         public bool Contains(int x, int y)
         {
-            return Left <= x && x <= Right &&
-                   Top <= y && y <= Bottom;
+            return Left <= x && x < Right &&
+                   Top <= y && y < Bottom;
         }
 
         public bool Contains(Rect other)
