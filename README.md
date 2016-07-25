@@ -6,6 +6,9 @@ MonoGame framework, and is intended to run on Windows and be portable to at
 least Android. Secondary goals are to have reasonably decent pixel graphics
 and an interesting simulation system.
 
+For background information see the [RogueLike tag](http://kitsu.github.io/tags/roguelike/)
+on my blog [Superfluous Comments](https://kitsu.github.io).
+
 ## Architecture
 
 The initial design is meant to be something between Model View Controller (MVC)
@@ -22,15 +25,15 @@ The simulation models the world and everything in it, and contains all logic
 for updating the world. It keeps track of all the maps, tiles, and entities,
 managing their creation, deletion, and update. Actors in the simulation are
 built using a Component Entity System, and the simulation handles all system
-executions.
+executions. See [Simulation](/PCGTest/Simulation).
 
 ### Display
 
 The display handles the actual drawing of everything to the screen, and
 processes raw user input. The display contains a handle on the physical display
 (the screen), and maintains a stack of "views" which define what is shown on
-the screen. Views are drawn from bottom to top, and the topmost view defines
-the active input mapping.
+the screen. Views are drawn from bottom to top, with views higher in the stack
+optionally overriding active user input mappings.
 
 ### Director
 
