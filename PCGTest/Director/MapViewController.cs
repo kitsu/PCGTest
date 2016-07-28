@@ -55,8 +55,8 @@ namespace PCGTest.Director
         {
             var keys = new Dictionary<int, string>() {
                 { 0, "SolidBlack" },
-                { 1, "Pit.Brick.CyanWater" },
-                { 2, "Floor.Brick.Gray" },
+                { 1, "Pit.Brick.FreshWater" },
+                { 2, "Floor.Brick.LiteGray" },
                 { 3, "Wall.Brick.LiteBlue" },
             };
             foreach (var key in keys)

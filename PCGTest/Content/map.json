@@ -147,7 +147,8 @@
       "Fore": 324
     },
 
-    // LiteBlue floor
+    // Floors
+    // LiteBlue brick floor
     "Floor.Brick.LiteBlue.TopLeft": {
       "Fore": 768
     },
@@ -197,180 +198,637 @@
       "Fore": 837
     },
 
-    // Gray floor
-    "Floor.Brick.Gray.TopLeft": {
+    // LiteLiteGray brick floor
+    "Floor.Brick.LiteGray.TopLeft": {
       "Fore": 774
     },
-    "Floor.Brick.Gray.TopMiddle": {
+    "Floor.Brick.LiteGray.TopMiddle": {
       "Fore": 775
     },
-    "Floor.Brick.Gray.TopRight": {
+    "Floor.Brick.LiteGray.TopRight": {
       "Fore": 776
     },
-    "Floor.Brick.Gray.MiddleLeft": {
+    "Floor.Brick.LiteGray.MiddleLeft": {
       "Fore": 838
     },
-    "Floor.Brick.Gray.Middle": {
+    "Floor.Brick.LiteGray.Middle": {
       "Fore": 839
     },
-    "Floor.Brick.Gray.MiddleRight": {
+    "Floor.Brick.LiteGray.MiddleRight": {
       "Fore": 840
     },
-    "Floor.Brick.Gray.BottomLeft": {
+    "Floor.Brick.LiteGray.BottomLeft": {
       "Fore": 902
     },
-    "Floor.Brick.Gray.BottomMiddle": {
+    "Floor.Brick.LiteGray.BottomMiddle": {
       "Fore": 903
     },
-    "Floor.Brick.Gray.BottomRight": {
+    "Floor.Brick.LiteGray.BottomRight": {
       "Fore": 904
     },
-    "Floor.Brick.Gray.SingleTop": {
+    "Floor.Brick.LiteGray.SingleTop": {
       "Fore": 777
     },
-    "Floor.Brick.Gray.SingleVertical": {
+    "Floor.Brick.LiteGray.SingleVertical": {
       "Fore": 841
     },
-    "Floor.Brick.Gray.SingleBottom": {
+    "Floor.Brick.LiteGray.SingleBottom": {
       "Fore": 905
     },
-    "Floor.Brick.Gray.SingleLeft": {
+    "Floor.Brick.LiteGray.SingleLeft": {
       "Fore": 778
     },
-    "Floor.Brick.Gray.SingleHorizontal": {
+    "Floor.Brick.LiteGray.SingleHorizontal": {
       "Fore": 842
     },
-    "Floor.Brick.Gray.SingleRight": {
+    "Floor.Brick.LiteGray.SingleRight": {
       "Fore": 906
     },
-    "Floor.Brick.Gray.Single": {
+    "Floor.Brick.LiteGray.Single": {
       "Fore": 843
     },
 
+    // Sand floor
+    "Floor.Sand.TopLeft": {
+      "Fore": 1152
+    },
+    "Floor.Sand.TopMiddle": {
+      "Fore": 1153
+    },
+    "Floor.Sand.TopRight": {
+      "Fore": 1154
+    },
+    "Floor.Sand.MiddleLeft": {
+      "Fore": 1216
+    },
+    "Floor.Sand.Middle": {
+      "Fore": 1217
+    },
+    "Floor.Sand.MiddleRight": {
+      "Fore": 1218
+    },
+    "Floor.Sand.BottomLeft": {
+      "Fore": 1280
+    },
+    "Floor.Sand.BottomMiddle": {
+      "Fore": 1281
+    },
+    "Floor.Sand.BottomRight": {
+      "Fore": 1282
+    },
+    "Floor.Sand.SingleTop": {
+      "Fore": 1155
+    },
+    "Floor.Sand.SingleVertical": {
+      "Fore": 1219
+    },
+    "Floor.Sand.SingleBottom": {
+      "Fore": 1283
+    },
+    "Floor.Sand.SingleLeft": {
+      "Fore": 1156
+    },
+    "Floor.Sand.SingleHorizontal": {
+      "Fore": 1220
+    },
+    "Floor.Sand.SingleRight": {
+      "Fore": 1284
+    },
+    "Floor.Sand.Single": {
+      "Fore": 1221
+    },
+
+    // Sand grass floor
+    "Floor.Sand.Grass.TopLeft": {
+      "Fore": 960
+    },
+    "Floor.Sand.Grass.TopMiddle": {
+      "Fore": 961
+    },
+    "Floor.Sand.Grass.TopRight": {
+      "Fore": 962
+    },
+    "Floor.Sand.Grass.MiddleLeft": {
+      "Fore": 1024
+    },
+    "Floor.Sand.Grass.Middle": {
+      "Fore": 1025
+    },
+    "Floor.Sand.Grass.MiddleRight": {
+      "Fore": 1026
+    },
+    "Floor.Sand.Grass.BottomLeft": {
+      "Fore": 1088
+    },
+    "Floor.Sand.Grass.BottomMiddle": {
+      "Fore": 1089
+    },
+    "Floor.Sand.Grass.BottomRight": {
+      "Fore": 1090
+    },
+    "Floor.Sand.Grass.SingleTop": {
+      "Fore": 963
+    },
+    "Floor.Sand.Grass.SingleVertical": {
+      "Fore": 1027
+    },
+    "Floor.Sand.Grass.SingleBottom": {
+      "Fore": 1091
+    },
+    "Floor.Sand.Grass.SingleLeft": {
+      "Fore": 964
+    },
+    "Floor.Sand.Grass.SingleHorizontal": {
+      "Fore": 1028
+    },
+    "Floor.Sand.Grass.SingleRight": {
+      "Fore": 1092
+    },
+    "Floor.Sand.Grass.Single": {
+      "Fore": 1029
+    },
+
+    // Dirt floor
+    "Floor.Dirt.TopLeft": {
+      "Fore": 1158
+    },
+    "Floor.Dirt.TopMiddle": {
+      "Fore": 1159
+    },
+    "Floor.Dirt.TopRight": {
+      "Fore": 1160
+    },
+    "Floor.Dirt.MiddleLeft": {
+      "Fore": 1222
+    },
+    "Floor.Dirt.Middle": {
+      "Fore": 1223
+    },
+    "Floor.Dirt.MiddleRight": {
+      "Fore": 1224
+    },
+    "Floor.Dirt.BottomLeft": {
+      "Fore": 1286
+    },
+    "Floor.Dirt.BottomMiddle": {
+      "Fore": 1287
+    },
+    "Floor.Dirt.BottomRight": {
+      "Fore": 1288
+    },
+    "Floor.Dirt.SingleTop": {
+      "Fore": 1161
+    },
+    "Floor.Dirt.SingleVertical": {
+      "Fore": 1225
+    },
+    "Floor.Dirt.SingleBottom": {
+      "Fore": 1289
+    },
+    "Floor.Dirt.SingleLeft": {
+      "Fore": 1162
+    },
+    "Floor.Dirt.SingleHorizontal": {
+      "Fore": 1226
+    },
+    "Floor.Dirt.SingleRight": {
+      "Fore": 1290
+    },
+    "Floor.Dirt.Single": {
+      "Fore": 1227
+    },
+
+    // Dirt grass floor
+    "Floor.Dirt.Grass.TopLeft": {
+      "Fore": 966
+    },
+    "Floor.Dirt.Grass.TopMiddle": {
+      "Fore": 967
+    },
+    "Floor.Dirt.Grass.TopRight": {
+      "Fore": 968
+    },
+    "Floor.Dirt.Grass.MiddleLeft": {
+      "Fore": 1030
+    },
+    "Floor.Dirt.Grass.Middle": {
+      "Fore": 1031
+    },
+    "Floor.Dirt.Grass.MiddleRight": {
+      "Fore": 1032
+    },
+    "Floor.Dirt.Grass.BottomLeft": {
+      "Fore": 1094
+    },
+    "Floor.Dirt.Grass.BottomMiddle": {
+      "Fore": 1095
+    },
+    "Floor.Dirt.Grass.BottomRight": {
+      "Fore": 1096
+    },
+    "Floor.Dirt.Grass.SingleTop": {
+      "Fore": 969
+    },
+    "Floor.Dirt.Grass.SingleVertical": {
+      "Fore": 1033
+    },
+    "Floor.Dirt.Grass.SingleBottom": {
+      "Fore": 1097
+    },
+    "Floor.Dirt.Grass.SingleLeft": {
+      "Fore": 970
+    },
+    "Floor.Dirt.Grass.SingleHorizontal": {
+      "Fore": 1034
+    },
+    "Floor.Dirt.Grass.SingleRight": {
+      "Fore": 1098
+    },
+    "Floor.Dirt.Grass.Single": {
+      "Fore": 1035
+    },
+
     // Animated pits (water, lava, etc.)
-    "Pit.Brick.CyanWater.TopLeft": {
+    // Fresh water brick
+    "Pit.Brick.FreshWater.TopLeft": {
       "Animated": true,
       "Fore": 1472,
       "Back": 1478,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.TopMiddle": {
+    "Pit.Brick.FreshWater.TopMiddle": {
       "Animated": true,
       "Fore": 1473,
       "Back": 1479,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.TopRight": {
+    "Pit.Brick.FreshWater.TopRight": {
       "Animated": true,
       "Fore": 1474,
       "Back": 1480,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.MiddleLeft": {
+    "Pit.Brick.FreshWater.MiddleLeft": {
       "Animated": true,
       "Fore": 1536,
       "Back": 1542,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.Middle": {
+    "Pit.Brick.FreshWater.Middle": {
       "Animated": true,
       "Fore": 1537,
       "Back": 1543,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.MiddleRight": {
+    "Pit.Brick.FreshWater.MiddleRight": {
       "Animated": true,
       "Fore": 1538,
       "Back": 1544,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.BottomLeft": {
+    "Pit.Brick.FreshWater.BottomLeft": {
       "Animated": true,
       "Fore": 1600,
       "Back": 1606,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.BottomMiddle": {
+    "Pit.Brick.FreshWater.BottomMiddle": {
       "Animated": true,
       "Fore": 1601,
       "Back": 1607,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.BottomRight": {
+    "Pit.Brick.FreshWater.BottomRight": {
       "Animated": true,
       "Fore": 1602,
       "Back": 1608,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.SingleTop": {
+    "Pit.Brick.FreshWater.SingleTop": {
       "Animated": true,
       "Fore": 1475,
       "Back": 1481,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.SingleVertical": {
+    "Pit.Brick.FreshWater.SingleVertical": {
       "Animated": true,
       "Fore": 1539,
       "Back": 1545,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.SingleBottom": {
+    "Pit.Brick.FreshWater.SingleBottom": {
       "Animated": true,
       "Fore": 1603,
       "Back": 1609,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.OutBottomRight": {
+    "Pit.Brick.FreshWater.OutBottomRight": {
       "Animated": true,
       "Fore": 1476,
       "Back": 1482,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.OutBottomLeft": {
+    "Pit.Brick.FreshWater.OutBottomLeft": {
       "Animated": true,
       "Fore": 1477,
       "Back": 1483,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.OutTopRight": {
+    "Pit.Brick.FreshWater.OutTopRight": {
       "Animated": true,
       "Fore": 1604,
       "Back": 1610,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.OutTopLeft": {
+    "Pit.Brick.FreshWater.OutTopLeft": {
       "Animated": true,
       "Fore": 1605,
       "Back": 1611,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.TeeTop": {
+    "Pit.Brick.FreshWater.TeeTop": {
       "Animated": true,
       "Fore": 1540,
       "Back": 1546,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
-    "Pit.Brick.CyanWater.TeeBottom": {
+    "Pit.Brick.FreshWater.TeeBottom": {
       "Animated": true,
       "Fore": 1541,
       "Back": 1547,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+
+    // Fresh water rock
+    "Pit.Rock.FreshWater.TopLeft": {
+      "Animated": true,
+      "Fore": 1664,
+      "Back": 1670,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.TopMiddle": {
+      "Animated": true,
+      "Fore": 1665,
+      "Back": 1671,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.TopRight": {
+      "Animated": true,
+      "Fore": 1666,
+      "Back": 1672,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.MiddleLeft": {
+      "Animated": true,
+      "Fore": 1728,
+      "Back": 1734,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.Middle": {
+      "Animated": true,
+      "Fore": 1729,
+      "Back": 1735,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.MiddleRight": {
+      "Animated": true,
+      "Fore": 1730,
+      "Back": 1736,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.BottomLeft": {
+      "Animated": true,
+      "Fore": 1729,
+      "Back": 1798,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.BottomMiddle": {
+      "Animated": true,
+      "Fore": 1730,
+      "Back": 1799,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.BottomRight": {
+      "Animated": true,
+      "Fore": 1731,
+      "Back": 1800,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.SingleTop": {
+      "Animated": true,
+      "Fore": 1667,
+      "Back": 1673,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.SingleVertical": {
+      "Animated": true,
+      "Fore": 1731,
+      "Back": 1737,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.SingleBottom": {
+      "Animated": true,
+      "Fore": 1795,
+      "Back": 1801,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.OutBottomRight": {
+      "Animated": true,
+      "Fore": 1668,
+      "Back": 1674,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.OutBottomLeft": {
+      "Animated": true,
+      "Fore": 1669,
+      "Back": 1675,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.OutTopRight": {
+      "Animated": true,
+      "Fore": 1796,
+      "Back": 1802,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.OutTopLeft": {
+      "Animated": true,
+      "Fore": 1797,
+      "Back": 1803,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.TeeTop": {
+      "Animated": true,
+      "Fore": 1732,
+      "Back": 1738,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Rock.FreshWater.TeeBottom": {
+      "Animated": true,
+      "Fore": 1733,
+      "Back": 1739,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+
+    // Sea water brick
+    "Pit.Brick.SaltWater.TopLeft": {
+      "Animated": true,
+      "Fore": 1484,
+      "Back": 1490,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.TopMiddle": {
+      "Animated": true,
+      "Fore": 1485,
+      "Back": 1491,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.TopRight": {
+      "Animated": true,
+      "Fore": 1486,
+      "Back": 1492,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.MiddleLeft": {
+      "Animated": true,
+      "Fore": 1548,
+      "Back": 1554,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.Middle": {
+      "Animated": true,
+      "Fore": 1549,
+      "Back": 1555,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.MiddleRight": {
+      "Animated": true,
+      "Fore": 1550,
+      "Back": 1556,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.BottomLeft": {
+      "Animated": true,
+      "Fore": 1612,
+      "Back": 1618,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.BottomMiddle": {
+      "Animated": true,
+      "Fore": 1613,
+      "Back": 1619,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.BottomRight": {
+      "Animated": true,
+      "Fore": 1614,
+      "Back": 1620,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.SingleTop": {
+      "Animated": true,
+      "Fore": 1487,
+      "Back": 1493,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.SingleVertical": {
+      "Animated": true,
+      "Fore": 1551,
+      "Back": 1557,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.SingleBottom": {
+      "Animated": true,
+      "Fore": 1615,
+      "Back": 1621,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.OutBottomRight": {
+      "Animated": true,
+      "Fore": 1488,
+      "Back": 1494,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.OutBottomLeft": {
+      "Animated": true,
+      "Fore": 1489,
+      "Back": 1495,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.OutTopRight": {
+      "Animated": true,
+      "Fore": 1616,
+      "Back": 1622,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.OutTopLeft": {
+      "Animated": true,
+      "Fore": 1617,
+      "Back": 1623,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.TeeTop": {
+      "Animated": true,
+      "Fore": 1552,
+      "Back": 1558,
+      "ForeDuration": 500,
+      "TotalDuration": 1000
+    },
+    "Pit.Brick.SaltWater.TeeBottom": {
+      "Animated": true,
+      "Fore": 1553,
+      "Back": 1559,
       "ForeDuration": 500,
       "TotalDuration": 1000
     },
