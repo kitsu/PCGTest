@@ -326,7 +326,11 @@ namespace PCGTest.Display.MonoGame
 
         public TileProvider(int shift = 8)
         {
-            _tileKeys = new Dictionary<int, string>();
+            _tileKeys = new Dictionary<int, string>
+            {
+                // Ensure void always maps to Solid Black
+                {0, "SolidBlack" }
+            };
             _shift = shift;
         }
 
@@ -339,14 +343,17 @@ namespace PCGTest.Display.MonoGame
         /// <param name="tileKeys">The dictionary to be populated.</param>
         public void AddTileType(KeyValuePair<int, string> tileKey)
         {
+            var shifted = tileKey.Key << _shift;
+            if (_tileKeys.ContainsKey(shifted))
+                return;
             // Always add tileKey
-            _tileKeys[tileKey.Key << _shift] = tileKey.Value;
+            _tileKeys[shifted] = tileKey.Value;
             // Look up key in map of keys to <offset, suffix> pairs
             var expansion = GetExpansionData(tileKey.Value);
             foreach (var pair in expansion)
             {
                 // Add each (key << 8) + offset = value + suffix to tileKeys
-                _tileKeys[(tileKey.Key << _shift) + pair.Key] =
+                _tileKeys[(shifted) + pair.Key] =
                     $"{tileKey.Value}.{pair.Value}";
             }
         }

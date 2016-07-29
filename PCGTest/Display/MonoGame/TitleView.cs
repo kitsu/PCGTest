@@ -15,9 +15,9 @@ namespace PCGTest.Display.MonoGame
     class TitleView: BaseView
     {
         SpriteMap mapSprites;
+        TileProvider _tiles;
         Rectangle tileRect;
-        Dictionary<char, string> _tileKeys;
-        string[] _tileMap;
+        int[,] _tileMap;
         private readonly Subject<string> _selection;
         public IObservable<string> WhenSelected;
 
@@ -37,32 +37,34 @@ namespace PCGTest.Display.MonoGame
             Width /= Size;
             Height /= Size;
             tileRect = new Rectangle(0, 0, Size, Size);
+            _tiles = new TileProvider();
+            // Create map as string array with prefab "title island"
             var island = new string[] {
                 @"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-                @"~[------------------------------------]~",
-                @"~/1==================================2\~",
-                @"~/(..................................)\~",
-                @"~/(....L#T#R.LTR.L#T#R.^.....l###R...)\~",
-                @"~/(......*....*....*...*.....*.......)\~",
-                @"~/(......*....*....*...*.....E##.....)\~",
-                @"~/(......*....*....*...*.....*.......)\~",
-                @"~/(......V...LtR...V...L###R.L###R...)\~",
-                @"~/(..................................)\~",
-                @"~/(.<,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,>.)\~",
-                @"~/(..................................)\~",
-                @"~/(.l##############################r.)\~",
-                @"~/(.*5____________________________6*.)\~",
-                @"~/(.*\~~~~~~~~~~~~~~~~~~~~~~~~~~~~/*.)\~",
-                @"~/(.*\~~~~~~~~~~~~~~~~~~~~~~~~~~~~/*.)\~",
-                @"~/(.*\~~~~~~~~~~~~~~~~~~~~~~~~~~~~/*.)\~",
-                @"~/(.*\~~~~~~~~~~~~~~~~~~~~~~~~~~~~/*.)\~",
-                @"~/(.*\~~~~~~~~~~~~~~~~~~~~~~~~~~~~/*.)\~",
-                @"~/(.*\~~~~~~~~~~~~~~~~~~~~~~~~~~~~/*.)\~",
-                @"~/(.*7----------------------------8*.)\~",
-                @"~/(.L##############################R.)\~",
-                @"~/(..................................)\~",
-                @"~/3++++++++++++++++++++++++++++++++++4\~",
-                @"~{____________________________________}~",
+                @"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+                @"~~....................................~~",
+                @"~~....................................~~",
+                @"~~.....#####.###.#####.#.....#####....~~",
+                @"~~.......#....#....#...#.....#........~~",
+                @"~~.......#....#....#...#.....###......~~",
+                @"~~.......#....#....#...#.....#........~~",
+                @"~~.......#...###...#...#####.#####....~~",
+                @"~~....................................~~",
+                @"~~..################################..~~",
+                @"~~....................................~~",
+                @"~~..################################..~~",
+                @"~~..#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#..~~",
+                @"~~..#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#..~~",
+                @"~~..#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#..~~",
+                @"~~..#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#..~~",
+                @"~~..#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#..~~",
+                @"~~..#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#..~~",
+                @"~~..#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#..~~",
+                @"~~..#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#..~~",
+                @"~~..################################..~~",
+                @"~~....................................~~",
+                @"~~....................................~~",
+                @"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
                 @"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
             };
             var row = new string('~', Width);
@@ -79,46 +81,19 @@ namespace PCGTest.Display.MonoGame
             {
                 map.Add(row);
             }
-            _tileMap = map.ToArray();
-            _tileKeys = new Dictionary<char, string>()
+            // Convert string map to int array
+            var tileMap = new int[Width, Height];
+            for (var y = 0; y < Height; y++)
             {
-                {'~', "Pit.Brick.CyanWater.Middle" },
-                {'[', "Pit.Brick.CyanWater.OutTopRight" },
-                {'-', "Pit.Brick.CyanWater.BottomMiddle" },
-                {']', "Pit.Brick.CyanWater.OutTopLeft" },
-                {'/', "Pit.Brick.CyanWater.MiddleRight" },
-                {'\\', "Pit.Brick.CyanWater.MiddleLeft" },
-                {'{', "Pit.Brick.CyanWater.OutBottomRight" },
-                {'_', "Pit.Brick.CyanWater.TopMiddle" },
-                {'}', "Pit.Brick.CyanWater.OutBottomLeft" },
-                {'5', "Pit.Brick.CyanWater.TopLeft" },
-                {'6', "Pit.Brick.CyanWater.TopRight" },
-                {'7', "Pit.Brick.CyanWater.BottomLeft" },
-                {'8', "Pit.Brick.CyanWater.BottomRight" },
-                {'.', "Floor.Brick.Gray.Middle" },
-                {'1', "Floor.Brick.Gray.TopLeft" },
-                {'=', "Floor.Brick.Gray.TopMiddle" },
-                {'2', "Floor.Brick.Gray.TopRight" },
-                {'(', "Floor.Brick.Gray.MiddleLeft" },
-                {')', "Floor.Brick.Gray.MiddleRight" },
-                {'3', "Floor.Brick.Gray.BottomLeft" },
-                {'+', "Floor.Brick.Gray.BottomMiddle" },
-                {'4', "Floor.Brick.Gray.BottomRight" },
-                {'<', "Floor.Brick.Gray.SingleLeft" },
-                {',', "Floor.Brick.Gray.SingleHorizontal" },
-                {'>', "Floor.Brick.Gray.SingleRight" },
-                {'#', "Wall.Brick.LiteBlue.Horizontal" },
-                {'*', "Wall.Brick.LiteBlue.Vertical" },
-                {'T', "Wall.Brick.LiteBlue.TeeTop" },
-                {'t', "Wall.Brick.LiteBlue.TeeBottom" },
-                {'E', "Wall.Brick.LiteBlue.TeeLeft" },
-                {'L', "Wall.Brick.LiteBlue.BottomLeft" },
-                {'l', "Wall.Brick.LiteBlue.TopLeft" },
-                {'R', "Wall.Brick.LiteBlue.BottomRight" },
-                {'r', "Wall.Brick.LiteBlue.TopRight" },
-                {'^', "Wall.Brick.LiteBlue.TopCap" },
-                {'V', "Wall.Brick.LiteBlue.BottomCap" },
-            };
+                for (var x = 0; x < Width; x++)
+                {
+                    tileMap[x, y] = map[y][x];
+                }
+            }
+            _tiles.AddTileType(new KeyValuePair<int, string>('~', "Pit.FreshWater.Brick"));
+            _tiles.AddTileType(new KeyValuePair<int, string>('.', "Floor.Brick.Gray"));
+            _tiles.AddTileType(new KeyValuePair<int, string>('#', "Wall.Brick.LiteBlue"));
+            _tileMap = _tiles.ResolveMap(tileMap);
         }
 
         public override void Update(int elapsed)
@@ -136,21 +111,16 @@ namespace PCGTest.Display.MonoGame
         {
             Rectangle dest = tileRect;
             string tile;
-            int x = 0;
-            int y = 0;
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
-            foreach (string row in _tileMap)
+            for (var y = 0; y < Height; y++)
             {
-                foreach (char id in row)
+                for (var x=0; x < Width; x++)
                 {
-                    tile = _tileKeys[id];
+                    tile = _tiles[_tileMap[x, y]];
                     dest.X = Size * x;
                     dest.Y = Size * y;
                     mapSprites.Draw(spriteBatch, tile, dest);
-                    x += 1;
                 }
-                x = 0;
-                y += 1;
             }
             spriteBatch.End();
         }
