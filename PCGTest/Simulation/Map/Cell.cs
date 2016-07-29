@@ -8,11 +8,12 @@ namespace PCGTest.Simulation.Map
 {
     public class Cell
     {
-        public string Floor;
-        public string Fill;
+        public int Floor;
+        public int Fill;
+        public int Occupant;
         public List<string> Contents;
 
-        public Cell(string floor, string fill)
+        public Cell(int floor, int fill)
         {
             Floor = floor;
             Fill = fill;

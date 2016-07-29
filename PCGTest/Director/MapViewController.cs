@@ -16,10 +16,8 @@ namespace PCGTest.Director
      * chunks, provide sprite collections for a given map view tile coordinate. */
     public class MapViewController: IDisposable
     {
-        // Pairs of subjects and public observables
-        private readonly Subject<KeyValuePair<int, string>> _addTileKey;
+        // Observables
         public IObservable<KeyValuePair<int, string>> WhenAddTileKey;
-        private readonly Subject<int> _subTileKey;
         public IObservable<int> WhenSubTileKey;
         // Other members
         GameManager _parent;
@@ -28,10 +26,8 @@ namespace PCGTest.Director
         public MapViewController(GameManager parent)
         {
             _parent = parent;
-            _addTileKey = new Subject<KeyValuePair<int, string>>();
-            WhenAddTileKey = _addTileKey.AsObservable();
-            _subTileKey = new Subject<int>();
-            WhenSubTileKey = _subTileKey.AsObservable();
+            WhenAddTileKey = parent.SimMan.WhenMaterialAdd;
+            WhenSubTileKey = parent.SimMan.WhenMaterialRemove;
             Viewports = new List<Viewport>();
 
             // Register for sim map notifications
@@ -53,22 +49,10 @@ namespace PCGTest.Director
 
         public void Initialize()
         {
-            var keys = new Dictionary<int, string>() {
-                { 0, "SolidBlack" },
-                { 1, "Pit.Brick.FreshWater" },
-                { 2, "Floor.Brick.LiteGray" },
-                { 3, "Wall.Brick.LiteBlue" },
-            };
-            foreach (var key in keys)
-            {
-                _addTileKey.OnNext(key);
-            }
         }
 
         public void Dispose()
         {
-            _addTileKey.OnCompleted();
-            _subTileKey.OnCompleted();
             foreach (var vp in Viewports)
             {
                 vp.Dispose();
@@ -81,10 +65,6 @@ namespace PCGTest.Director
         public Rect Bounds;
         SimulationManager _sim;
         // Streams
-        private readonly Subject<KeyValuePair<int, string>> _addTileKey;
-        public IObservable<KeyValuePair<int, string>> WhenAddTileKey;
-        private readonly Subject<int> _subTileKey;
-        public IObservable<int> WhenSubTileKey;
         private readonly Subject<int[,]> _mapChange;
         public IObservable<int[,]> WhenMapChanges;
         // State
@@ -98,10 +78,6 @@ namespace PCGTest.Director
             _tiles = new int[rect.Width, rect.Height];
             _tileKeys = new Dictionary<int, string>();
             // Setup streams
-            _addTileKey = new Subject<KeyValuePair<int, string>>();
-            WhenAddTileKey = _addTileKey.AsObservable();
-            _subTileKey = new Subject<int>();
-            WhenSubTileKey = _subTileKey.AsObservable();
             _mapChange = new Subject<int[,]>();
             WhenMapChanges = _mapChange.AsObservable();
             // Register for chunk events
@@ -123,12 +99,12 @@ namespace PCGTest.Director
                 var coord = cell.Key - Bounds.TopLeft;
                 //FIXME: Convert from cell data to tile key
                 int tile;
-                if (cell.Value.Fill == "")
+                if (cell.Value.Fill == 0)
                 {
-                    tile = cell.Value.Floor == "Water" ? 1 : 2;
+                    tile = cell.Value.Floor;
                 } else
                 {
-                    tile = 3;
+                    tile = cell.Value.Fill;
                 }
                 if (_tiles[coord.X, coord.Y] != tile)
                 {

@@ -20,6 +20,24 @@ roguelikes. Vertical structures can be generated both above and below the
 ground level. Examples are: multi-story buildings with basements, open pits,
 mountains, large trees, and natural caves.
 
+### Representation
+
+Individual map cells have two slots: Floor & Fill, which describe the cells
+properties. The Floor describes the bottom of the cell and what is below it
+(the distance from the bottom of one cell to the top of the cell below is
+non-zero). The Fill describes any obstructions above the floor (including
+entities). Cells additionally have a contents list, where contents are anything
+inside the cell volume which is not large enough to obstruct vision or
+movement.
+
+Floor materials are chosen from a relatively small set, so they can be
+enumerated once and referenced by an integer index. Examples are: void, water,
+rock, dirt, grass, etc.
+
+Fill can be either a material type, indexed to the same data as the floor
+materials, or an entity reference. Entities are referenced by their unique id
+number, and their properties are determined by their component data.
+
 ## Entity System
 
 Entities are generic containers for collections of data (components) that
@@ -38,3 +56,15 @@ simulation contains a count-down timer which is used to order entity updates.
 Each tick all timers are decremented. When any entity's timer reaches zero it
 can then perform some action, which in turn adds some number of ticks back to
 the entity's timer.
+
+## Persistence
+
+The simulation is built of two parts: places and things. Places in memory are
+stored in chunks, which are effectively 3d arrays of integers. Because
+multi-dimension arrays can be trivially linearized storing chunk data should be
+straight forward. Storage space can be reduced by computing and storing a diff
+from the generated chunk. Things, i.e. entities, are generated with a unique
+identifier. When unloaded entities are written to a file named with the entity
+id. When a chunk is loaded that references an entity, and the id isn't present
+in-memory, then the file is read and the entity is reconstituted.
+

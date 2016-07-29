@@ -423,7 +423,13 @@ namespace PCGTest.Display.MonoGame
                     else if (!_tileKeys.ContainsKey(shifted + 1))
                     {
                         // If the tile doesn't have alternates just use shifted value
-                        result[x, y] = shifted;
+                        if (MapSolver.IsBorder(x, y, map))
+                        {
+                            result[x, y] = 0;
+                        } else
+                        {
+                            result[x, y] = shifted;
+                        }
                     }
                     else
                     {

@@ -7,6 +7,7 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using PCGTest.Simulation.Map;
+using PCGTest.Simulation.Map.Generators;
 using PCGTest.Utilities.Geometry;
 using SharpNoise.Modules;
 
@@ -14,27 +15,29 @@ namespace PCGTest.Simulation
 {
     public class SimulationManager
     {
+        ChunkSource _generator;
         public Dictionary<Vector, Chunk> LoadedChunks;
-        Random _rand;
-        Module _noise;
+        Dictionary<int, string> _mats;
         // Reactive streams
         private readonly Subject<KeyValuePair<Vector, Cell>> _cellUpdate;
         public IObservable<KeyValuePair<Vector, Cell>> WhenCellUpdates;
+        private readonly Subject<KeyValuePair<int, string>> _matAdd;
+        public IObservable<KeyValuePair<int, string>> WhenMaterialAdd;
+        private readonly Subject<int> _matRemove;
+        public IObservable<int> WhenMaterialRemove;
 
         public SimulationManager(int seed)
         {
-            _rand = new Random(seed);
-            var noise = new Perlin
-            {
-                Seed = seed,
-                Frequency = 0.1
-            };
-            _noise = noise;
             LoadedChunks = new Dictionary<Vector, Chunk>();
+            _mats = new Dictionary<int, string>();
+            _generator = new ChunkSource(seed);
             // Setup reactive streams
-            //WhenCellUpdates = Observable.Never<KeyValuePair<Vector, Cell>>();
             _cellUpdate = new Subject<KeyValuePair<Vector, Cell>>();
             WhenCellUpdates = _cellUpdate.AsObservable();
+            _matAdd = new Subject<KeyValuePair<int, string>>();
+            WhenMaterialAdd = _matAdd.AsObservable();
+            _matRemove = new Subject<int>();
+            WhenMaterialRemove = _matRemove.AsObservable();
         }
 
         public Chunk this[Vector index]
@@ -72,13 +75,26 @@ namespace PCGTest.Simulation
         {
             if (this[index] == null)
             {
-                var chunk = new Chunk(index, _rand, _noise);
+                var chunk = _generator.GetChunk(index);
                 chunk.WhenCellUpdates.Subscribe( p => _cellUpdate.OnNext(p));
                 LoadedChunks[index] = chunk;
                 chunk.Initialize();
+                UpdateMaterials(chunk);
                 return true;
             }
             return false;
+        }
+
+        void UpdateMaterials(Chunk chunk)
+        {
+            foreach (var mat in chunk.UsedMaterials)
+            {
+                if (!_mats.ContainsKey(mat.Key))
+                {
+                    _mats[mat.Key] = mat.Value;
+                    _matAdd.OnNext(mat);
+                }
+            }
         }
 
         public void Step()

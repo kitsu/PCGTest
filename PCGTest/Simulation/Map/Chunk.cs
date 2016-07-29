@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
+using PCGTest.Simulation.Map.Generators;
 using PCGTest.Utilities.Geometry;
 using SharpNoise.Modules;
 
@@ -14,22 +15,20 @@ namespace PCGTest.Simulation.Map
     {
         public const int ChunkSize = 32;
         public Vector Index;
-        Random _rand;
-        Module _noise;
+        ICellGenerator _generator;
         Cell[,] Cells;
         // Reactive streams
         private readonly Subject<KeyValuePair<Vector, Cell>> _cellUpdate;
         public IObservable<KeyValuePair<Vector, Cell>> WhenCellUpdates;
 
-        public Chunk(Vector index, Random rand, Module noise)
+        public Chunk(Vector index, ICellGenerator generator)
         {
             // Setup reactive streams
             _cellUpdate = new Subject<KeyValuePair<Vector, Cell>>();
             WhenCellUpdates = _cellUpdate.AsObservable();
             // Initialize
             Index = index;
-            _rand = rand;
-            _noise = noise;
+            _generator = generator;
             Cells = new Cell[ChunkSize, ChunkSize];
         }
 
@@ -40,21 +39,16 @@ namespace PCGTest.Simulation.Map
 
         void GenerateCells()
         {
-            double value;
             Vector coord;
-            Cell cell;
-            string floor, fill;
-            foreach (var global in Rect.Coordinates())
+            foreach (var pair in _generator.GetArea(Rect))
             {
-                coord = LocalCoord(global);
-                value = _noise.GetValue(global.X, global.Y, 0);
-                floor = (value <= 0.1) ? "Water" : "Brick";
-                fill = (0.5 <= value && value <= 0.6) ? "Wall" : "";
-                cell = new Cell(floor, fill);
-                Cells[coord.X, coord.Y] = cell;
-                _cellUpdate.OnNext(new KeyValuePair<Vector, Cell>(global, cell));
+                coord = LocalCoord(pair.Key);
+                Cells[coord.X, coord.Y] = pair.Value;
+                _cellUpdate.OnNext(pair);
             }
         }
+
+        public IDictionary<int, string> UsedMaterials => _generator.UsedMaterials;
 
         public Cell this[Vector index] => Cells[index.X, index.Y];
 
