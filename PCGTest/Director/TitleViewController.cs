@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
+using PCGTest.Display;
 
 namespace PCGTest.Director
 {
@@ -18,6 +19,11 @@ namespace PCGTest.Director
         public TitleViewController(GameManager parent)
         {
             _parent = parent;
+        }
+
+        public void Initialize(ITitleView view)
+        {
+            view.WhenSelected.Subscribe(ItemSelected);
         }
 
         public void ItemSelected(string item)

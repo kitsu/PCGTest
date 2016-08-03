@@ -24,6 +24,11 @@ namespace PCGTest.Display
         IView CreateTitleView(TitleViewController mapCtrl);
         IView CreateMapView(MapViewController mapCtrl);
     }
+    
+    public interface ITitleView
+    {
+        IObservable<string> WhenSelected { get; }
+    }
 
     public interface IMapView
     {
@@ -32,5 +37,6 @@ namespace PCGTest.Display
         void UpdateMap(int[,] map);
         void AddTileKey(KeyValuePair<int, string> key);
         void RemoveTileKey(int key);
+        IObservable<char> WhenMove { get; }
     }
 }

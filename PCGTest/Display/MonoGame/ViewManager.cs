@@ -34,11 +34,11 @@ namespace PCGTest.Display.MonoGame
         {
             var view = new TitleView(_screen, Width, Height);
             Add(view);
-            // Bind events
-            //ctrl.WhenFoo.Subscribe(view.Foo);
+            // Bind input events
             var dispose = _events.WhenClick.Subscribe(pos => view.MenuSelect());
             _handlers[view] = dispose;
-            view.WhenSelected.Subscribe(ctrl.ItemSelected);
+            // Let controller initialize
+            ctrl.Initialize(view);
             return view;
         }
 
@@ -48,13 +48,17 @@ namespace PCGTest.Display.MonoGame
             Add(view);
             // Setup controller viewport
             var vp = ctrl.AddViewport(new Rect(0, 0, view.Width, view.Height));
-            // Bind events
+            // Bind input events
+            var dispose = _events.WhenKeyPressed.Subscribe(view.HandleInput);
+            _handlers[view] = dispose;
+            // Bind controller events
             ctrl.WhenAddTileKey.Subscribe(view.AddTileKey);
-            ctrl.Initialize();
             vp.WhenMapChanges
                 .Throttle(new TimeSpan((1/60)*1000))
                 .Subscribe(view.UpdateMap);
-            vp.Initialize();
+            // Let controller initialize
+            vp.Initialize(view);
+            ctrl.Initialize(view);
             return view;
         }
 

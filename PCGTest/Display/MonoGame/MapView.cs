@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
+using System.Reactive.Subjects;
+using System.Reactive.Linq;
 
 namespace PCGTest.Display.MonoGame
 {
@@ -19,9 +22,15 @@ namespace PCGTest.Display.MonoGame
         TileProvider _tiles;
         Rectangle tileRect;
         int[,] _tileMap;
+        // Observables
+        private readonly Subject<char> _move;
+        public IObservable<char> WhenMove => _move.AsObservable();
 
         public MapView(GraphicsDevice screen, int width, int height):
-            base(screen, width, height) { }
+            base(screen, width, height)
+        {
+            _move = new Subject<char>();
+        }
 
         override public void LoadContent(object contentSource)
         {
@@ -71,6 +80,24 @@ namespace PCGTest.Display.MonoGame
         public void UpdateMap(int[,] map)
         {
             _tileMap = _tiles.ResolveMap(map);
+        }
+
+        public void HandleInput(Keys[] pressed)
+        {
+            // Note this ordering incidentally imposes a direction preference
+            if (pressed.Contains(Keys.K))
+            {
+                _move.OnNext('N');
+            } else if (pressed.Contains(Keys.J))
+            {
+                _move.OnNext('S');
+            } else if (pressed.Contains(Keys.H))
+            {
+                _move.OnNext('W');
+            } else if (pressed.Contains(Keys.L))
+            {
+                _move.OnNext('E');
+            }
         }
     }
 }

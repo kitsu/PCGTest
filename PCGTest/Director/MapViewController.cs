@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
+using PCGTest.Display;
 using PCGTest.Simulation;
 using PCGTest.Simulation.Map;
 using PCGTest.Utilities.Geometry;
@@ -47,8 +48,9 @@ namespace PCGTest.Director
             //pass
         }
 
-        public void Initialize()
+        public void Initialize(IMapView view)
         {
+            // Bind observable for move to move sim "player"
         }
 
         public void Dispose()
@@ -84,8 +86,10 @@ namespace PCGTest.Director
             sim.WhenCellUpdates.Subscribe(CellUpdated);
         }
 
-        public void Initialize()
+        public void Initialize(IMapView view)
         {
+            //FIXME Bind view move observable directly to move viewport rect
+            view.WhenMove.Subscribe(MoveView);
             // Trigger chunk load/touch
             _sim.LoadArea(Bounds);
         }
@@ -94,10 +98,7 @@ namespace PCGTest.Director
         {
             if (Bounds.Contains(cell.Key))
             {
-                // Ensure tile key is registered
-                // Notify tile update
                 var coord = cell.Key - Bounds.TopLeft;
-                //FIXME: Convert from cell data to tile key
                 int tile;
                 if (cell.Value.Fill == 0)
                 {
@@ -112,6 +113,27 @@ namespace PCGTest.Director
                     _mapChange.OnNext(_tiles);
                 }
             }
+        }
+
+        void MoveView(char dir)
+        {
+            // Given one of NESW move the rect Up, Right, Down, or Left
+            switch (dir)
+            {
+                case 'N':
+                    Bounds.Y -= 1;
+                    break;
+                case 'S':
+                    Bounds.Y += 1;
+                    break;
+                case 'E':
+                    Bounds.X += 1;
+                    break;
+                case 'W':
+                    Bounds.X -= 1;
+                    break;
+            }
+            _sim.LoadArea(Bounds);
         }
 
         public void Dispose()

@@ -12,20 +12,20 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace PCGTest.Display.MonoGame
 {
-    class TitleView: BaseView
+    class TitleView: BaseView, ITitleView
     {
         SpriteMap mapSprites;
         TileProvider _tiles;
         Rectangle tileRect;
         int[,] _tileMap;
+        // Observables
         private readonly Subject<string> _selection;
-        public IObservable<string> WhenSelected;
+        public IObservable<string> WhenSelected => _selection.AsObservable();
 
         public TitleView(GraphicsDevice screen, int width, int height):
             base(screen, width, height)
         {
             _selection = new Subject<string>();
-            WhenSelected = _selection.AsObservable();
         }
 
         public override void LoadContent(object contentSource)

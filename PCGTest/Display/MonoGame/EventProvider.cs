@@ -14,12 +14,16 @@ namespace PCGTest.Display.MonoGame
     {
         private readonly Subject<Point> _click;
         public IObservable<Point> WhenClick;
+        private readonly Subject<Keys[]> _keys;
+        public IObservable<Keys[]> WhenKeyPressed;
         bool _down;
 
         public EventProvider()
         {
             _click = new Subject<Point>();
             WhenClick = _click.AsObservable();
+            _keys = new Subject<Keys[]>();
+            WhenKeyPressed = _keys.AsObservable();
         }
 
         public void Update(int elapsed)
@@ -33,6 +37,9 @@ namespace PCGTest.Display.MonoGame
                 _down = false;
                 _click.OnNext(ms.Position);
             }
+            var ks = Keyboard.GetState().GetPressedKeys();
+            if (ks.Count() > 0)
+                _keys.OnNext(ks);
         }
     }
 }
