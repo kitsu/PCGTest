@@ -39,9 +39,9 @@ namespace PCGTest.Utilities.Geometry
         }
 
         public int Left => X;
-        public int Right => X + Width;
+        public int Right => X + Width - 1;
         public int Top => Y;
-        public int Bottom => Y + Height;
+        public int Bottom => Y + Height - 1;
 
         public Vector TopLeft => new Vector(Left, Top);
         public Vector TopRight => new Vector(Right, Top);
@@ -93,14 +93,14 @@ namespace PCGTest.Utilities.Geometry
             var top = Math.Max(Top, other.Top);
             var right = Math.Min(Right, other.Right);
             var bottom = Math.Min(Bottom, other.Bottom);
-            return new Rect(left, top, right - left, bottom - top);
+            return new Rect(left, top, 1 + right - left, 1 + bottom - top);
         }
 
         public IEnumerable<Vector> Coordinates()
         {
-            for (var y = Y; y < Bottom; y++)
+            for (var y = Y; y <= Bottom; y++)
             {
-                for (var x = X; x < Right; x++)
+                for (var x = X; x <= Right; x++)
                 {
                     yield return new Vector(x, y);
                 }

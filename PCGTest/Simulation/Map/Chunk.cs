@@ -84,9 +84,15 @@ namespace PCGTest.Simulation.Map
         public Vector GlobalCoord(Vector loc) => (Index * ChunkSize) + loc;
 
         public static Vector LocalCoord(int x, int y) => LocalCoord(new Vector(x, y));
-        public static Vector LocalCoord(Vector coord) => coord % ChunkSize;
+        public static Vector LocalCoord(Vector coord) => (coord % ChunkSize).Abs();
 
         public static Vector Coord2Chunk(int x, int y) => Coord2Chunk(new Vector(x, y));
-        public static Vector Coord2Chunk(Vector coord) => coord / ChunkSize;
+        public static Vector Coord2Chunk(Vector coord) {
+            var sign = new Vector(
+                coord.X < 0 ? -1 : 0,
+                coord.Y < 0 ? -1 : 0
+                );
+            return sign + (coord / ChunkSize);
+        }
     }
 }

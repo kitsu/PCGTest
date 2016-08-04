@@ -21,22 +21,22 @@ namespace PCGTest.Test.Utilities.Geometry
             r.Top.Should().Be(2, "because of y initialization");
             r.Width.Should().Be(3, "because of width initialization");
             r.Height.Should().Be(4, "because of height initialization");
-            r.Right.Should().Be(1 + 3, "because right is x + width");
-            r.Bottom.Should().Be(2 + 4, "because bottom is y + height");
+            r.Right.Should().Be(1 + 2, "because right is x + width - 1");
+            r.Bottom.Should().Be(2 + 3, "because bottom is y + height - 1");
             r = new Rect(-4, -3, 2, 1);
             r.Left.Should().Be(-4, "because of x initialization (negative)");
             r.Top.Should().Be(-3, "because of y initialization (negative)");
             r.Width.Should().Be(2, "because of width initialization (negative)");
             r.Height.Should().Be(1, "because of height initialization (negative)");
-            r.Right.Should().Be(-4 + 2, "because right is x + width (negative)");
-            r.Bottom.Should().Be(-3 + 1, "because bottom is y + height (negative)");
+            r.Right.Should().Be(-4 + 1, "because right is x + width - 1 (negative)");
+            r.Bottom.Should().Be(-3 + 0, "because bottom is y + height - 1 (negative)");
             r = new Rect(0, 0, -5, -4);
             r.Left.Should().Be(-5, "because negative width replaces x");
             r.Top.Should().Be(-4, "because negative height replaces y");
             r.Width.Should().Be(5, "because width is absolute value of width");
             r.Height.Should().Be(4, "because height is absolute value of height");
-            r.Right.Should().Be(0, "because left becomes right with negative width");
-            r.Bottom.Should().Be(0, "because top becomes bottom with negative height");
+            r.Right.Should().Be(-1, "because left becomes right with negative width");
+            r.Bottom.Should().Be(-1, "because top becomes bottom with negative height");
         }
 
         [Test]
@@ -115,15 +115,15 @@ namespace PCGTest.Test.Utilities.Geometry
             r1 = new Rect(2, 2, 4, 4);
             r1.Intersects(r1).Should().BeTrue("because a rect intersects itself");
             r2 = new Rect(0, 0, 4, 4);
-            r1.Intersects(r2).Should().BeTrue("because 0->4 overlaps 2->6");
+            r1.Intersects(r2).Should().BeTrue("because 0->3 overlaps 2->5");
             r2.Width += 4;
             r2.Height += 4;
-            r1.Intersects(r2).Should().BeTrue("because 0->8 contains 2->6");
-            r2 = new Rect(0, 0, 2, 2);
-            r1.Intersects(r2).Should().BeTrue("because 0->2 touches 2->6");
+            r1.Intersects(r2).Should().BeTrue("because 0->7 contains 2->5");
+            r2 = new Rect(0, 0, 3, 3);
+            r1.Intersects(r2).Should().BeTrue("because 0->2 touches 2->5");
             r2.Width--;
             r2.Height--;
-            r1.Intersects(r2).Should().BeFalse("because 0->1 is outside 2->6");
+            r1.Intersects(r2).Should().BeFalse("because 0->0 is outside 2->5");
         }
 
         [Test]
@@ -164,25 +164,25 @@ namespace PCGTest.Test.Utilities.Geometry
             res.Should().HaveCount(3 * 4, "because there is one coordinate per unit area");
             res.Should().OnlyHaveUniqueItems("because each coord occurs once");
             res.Should().Contain(r.TopLeft, $"because {r.TopLeft}");
-            res.Should().Contain(new Vector(r.Right - 1, r.Top),
-                $"because {r.Width}");
-            res.Should().Contain(new Vector(r.Left, r.Bottom - 1),
-                $"because {r.Height}");
-            res.Should().Contain(new Vector(r.Right - 1, r.Bottom - 1),
-                $"because {r.BottomRight}");
+            res.Should().Contain(new Vector(r.Right, r.Top),
+                $"because width = {r.Width}");
+            res.Should().Contain(new Vector(r.Left, r.Bottom),
+                $"because height = {r.Height}");
+            res.Should().Contain(new Vector(r.Right, r.Bottom),
+                $"because bottom right = {r.BottomRight}");
             // Reverse rect
             r = new Rect(-4, -3, -2, -1);
             res = r.Coordinates().ToList();
-            res.Should().NotBeEmpty($"because {r} has a non-zero area");
-            res.Should().HaveCount(2 * 1, "because there is one coordinate per unit area");
-            res.Should().OnlyHaveUniqueItems("because each coord occurs once");
-            res.Should().Contain(r.TopLeft, $"because {r.TopLeft}");
-            res.Should().Contain(new Vector(r.Right - 1, r.Top),
-                $"because {r.Width}");
-            res.Should().Contain(new Vector(r.Left, r.Bottom - 1),
-                $"because {r.Height}");
-            res.Should().Contain(new Vector(r.Right - 1, r.Bottom - 1),
-                $"because {r.BottomRight}");
+            res.Should().NotBeEmpty($"because {r} has a non-zero area (negative)");
+            res.Should().HaveCount(2 * 1, "because there is one coordinate per unit area (negative)");
+            res.Should().OnlyHaveUniqueItems("because each coord occurs once (negative)");
+            res.Should().Contain(r.TopLeft, $"because top left = {r.TopLeft} (negative)");
+            res.Should().Contain(new Vector(r.Right, r.Top),
+                $"because width = {r.Width} (negative)");
+            res.Should().Contain(new Vector(r.Left, r.Bottom),
+                $"because height = {r.Height} (negative)");
+            res.Should().Contain(new Vector(r.Right, r.Bottom),
+                $"because bottom right = {r.BottomRight} (negative)");
         }
 
         [Test]
