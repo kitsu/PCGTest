@@ -94,5 +94,7 @@ namespace PCGTest.Simulation.Map
                 );
             return sign + (coord / ChunkSize);
         }
+        public static Vector Chunk2Coord(int x, int y) => Coord2Chunk(new Vector(x, y));
+        public static Vector Chunk2Coord(Vector coord) => coord * ChunkSize;
     }
 }

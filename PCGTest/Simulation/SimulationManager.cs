@@ -56,11 +56,17 @@ namespace PCGTest.Simulation
         {
             bool triggered;
             Vector index;
-            for (var y = area.Y; y < area.Bottom; y += Chunk.ChunkSize)
+            var unit = new Vector(1, 1);
+            // Quantize area TL to chunk coord, then move up & left by one chunk
+            var start = Chunk.Coord2Chunk(area.TopLeft) - unit;
+            // Quantize area end coord to chunk, move down & right by one chunk
+            var end = Chunk.Coord2Chunk(area.BottomRight) + unit;
+            // Step by chunk
+            for (var y = start.Y; y <= end.Y; y++)
             {
-                for (var x = area.X; x < area.Right; x += Chunk.ChunkSize)
+                for (var x = start.X; x <= end.X; x++)
                 {
-                    index = Chunk.Coord2Chunk(x, y);
+                    index = new Vector(x, y);
                     triggered = LoadChunk(index);
                     // Ensure update event for every chunk in area
                     if (!triggered)

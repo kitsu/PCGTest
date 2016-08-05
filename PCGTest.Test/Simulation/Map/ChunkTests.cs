@@ -76,5 +76,19 @@ namespace PCGTest.Test.Simulation.Map
             Chunk.Coord2Chunk(vec).Should().Be(new Vector(-1, -1),
                 "because negative coords lay in negative chunks");
         }
+
+        [Test]
+        public void Chunk_To_Coord_Conversion_Correct()
+        {
+            Chunk.Chunk2Coord(0, 0).Should().Be(Vector.Zero,
+                "because the origin of the origin chunk is the origin");
+            Chunk.Chunk2Coord(5, 9).Should().Be(Vector.Zero,
+                "because [5 9] lies in the zeroth chunk");
+            var size = new Vector(Chunk.ChunkSize, Chunk.ChunkSize);
+            Chunk.Chunk2Coord(new Vector(1, 1)).Should().Be(size,
+                "because coords change by ChunkSize each chunk index");
+            Chunk.Chunk2Coord(new Vector(-1, -1)).Should().Be(-size,
+                "because negative chunk coords step by negative ChunkSize");
+        }
     }
 }
