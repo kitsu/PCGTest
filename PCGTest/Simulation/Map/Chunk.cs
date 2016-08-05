@@ -34,7 +34,7 @@ namespace PCGTest.Simulation.Map
 
         public void Initialize()
         {
-            GenerateCells();
+            Task.Run(() => GenerateCells());
         }
 
         void GenerateCells()

@@ -91,7 +91,7 @@ namespace PCGTest.Director
             //FIXME Bind view move observable directly to move viewport rect
             view.WhenMove.Subscribe(MoveView);
             // Trigger chunk load/touch
-            _sim.LoadArea(Bounds);
+            Task.Run(() => _sim.LoadArea(Bounds));
         }
 
         public void CellUpdated(KeyValuePair<Vector, Cell> cell)
@@ -133,7 +133,7 @@ namespace PCGTest.Director
                     Bounds.X -= 1;
                     break;
             }
-            _sim.LoadArea(Bounds);
+            Task.Run(() => _sim.LoadArea(Bounds));
         }
 
         public void Dispose()

@@ -17,6 +17,7 @@ namespace PCGTest.Display.MonoGame
         private readonly Subject<Keys[]> _keys;
         public IObservable<Keys[]> WhenKeyPressed;
         bool _down;
+        HashSet<Keys> _pressed;
 
         public EventProvider()
         {
@@ -24,6 +25,7 @@ namespace PCGTest.Display.MonoGame
             WhenClick = _click.AsObservable();
             _keys = new Subject<Keys[]>();
             WhenKeyPressed = _keys.AsObservable();
+            _pressed = new HashSet<Keys>();
         }
 
         public void Update(int elapsed)
@@ -37,9 +39,17 @@ namespace PCGTest.Display.MonoGame
                 _down = false;
                 _click.OnNext(ms.Position);
             }
-            var ks = Keyboard.GetState().GetPressedKeys();
+            var ks = UpdateKeys(Keyboard.GetState().GetPressedKeys());
             if (ks.Count() > 0)
                 _keys.OnNext(ks);
+        }
+
+        Keys[] UpdateKeys(Keys[] keys)
+        {
+            var pressed = new HashSet<Keys>(keys);
+            var novel = pressed.Except(_pressed);
+            _pressed = pressed;
+            return novel.ToArray();
         }
     }
 }
