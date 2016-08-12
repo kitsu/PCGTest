@@ -84,6 +84,11 @@ namespace PCGTest.Test.Utilities.Geometry
             rect.Contains(new Vector(3, 7)).Should().BeFalse("because [3 7] is outside 2->6 rect");
             rect.Contains(7, 3).Should().BeFalse("because [7 3] is outside 2->6 rect");
             rect.Contains(new Vector(7, 3)).Should().BeFalse("because [7 3] is outside 2->6 rect");
+            // Tests based on usage
+            rect = new Rect(0, 0, 50, 30);
+            rect.Contains(new Vector(0, 0)).Should().BeTrue("because the rect origin should be in the rect");
+            rect.Contains(new Vector(49, 29)).Should().BeTrue("because the bottom right should be in the rect");
+            rect.Contains(new Vector(50, 30)).Should().BeFalse("because the rect doesn't contain the coord at size");
         }
 
         [Test]

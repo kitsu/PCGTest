@@ -67,7 +67,7 @@ namespace PCGTest.Simulation.Map
         /// <param name="area"></param>
         public void TouchArea(Rect area)
         {
-            var overlap = this.Rect.Intersection(area);
+            var overlap = Rect.Intersection(area);
             Cell cell;
             foreach (var coord in overlap.Coordinates())
             {
