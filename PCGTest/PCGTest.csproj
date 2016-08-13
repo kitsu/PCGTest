@@ -67,7 +67,6 @@
     <Compile Include="Display\MonoGame\MapView.cs" />
     <Compile Include="Display\MonoGame\SpriteMap.cs" />
     <Compile Include="Display\MonoGame\TileProvider.cs" />
-    <Compile Include="Display\MonoGame\TileSolver.cs" />
     <Compile Include="Display\MonoGame\TitleView.cs" />
     <Compile Include="Display\MonoGame\ViewManager.cs" />
     <Compile Include="Display\MonoGame\Views.cs" />

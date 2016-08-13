@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PCGTest.Utilities.Geometry;
 
 namespace PCGTest.Display.MonoGame
 {
@@ -208,17 +209,19 @@ namespace PCGTest.Display.MonoGame
 
     class MapSolver
     {
-        static Tuple<int, int>[] offsets = new []
+        static readonly Vector[] offsets = new []
         {
-            new Tuple<int, int>(-1, -1),
-            new Tuple<int, int>(0, -1),
-            new Tuple<int, int>(1, -1),
-            new Tuple<int, int>(-1, 0),
-            new Tuple<int, int>(1, 0),
-            new Tuple<int, int>(-1, 1),
-            new Tuple<int, int>(0, 1),
-            new Tuple<int, int>(1, 1),
+            new Vector(-1, -1),
+            new Vector(0, -1),
+            new Vector(1, -1),
+            new Vector(-1, 0),
+            new Vector(1, 0),
+            new Vector(-1, 1),
+            new Vector(0, 1),
+            new Vector(1, 1),
         };
+
+        public static Dictionary<int, List<int>> Affiliates = new Dictionary<int, List<int>> {};
 
         // 256 possible tile patterns mapped to tile type
         // NOTE: with careful selection of bit order trie lookup could be an option
@@ -291,13 +294,22 @@ namespace PCGTest.Display.MonoGame
         {
             var tile = map[x, y];
             int bits = 0;
-            foreach (var pair in offsets)
+            foreach (var vec in offsets)
             {
                 bits <<= 1;
-                if (map[x + pair.Item1, y + pair.Item2] == tile)
+                if (TilesMatch(tile, map[x + vec.X, y + vec.Y]))
                     bits += 1;
             }
             return bits;
+        }
+
+        public static bool TilesMatch(int first, int second)
+        {
+            if (first == second)
+                return true;
+            if (Affiliates.ContainsKey(first) && Affiliates[first].Contains(second))
+                return true;
+            return false;
         }
 
         public static TileType SolveTile(int x, int y, int[,] map)
@@ -322,6 +334,7 @@ namespace PCGTest.Display.MonoGame
     public class TileProvider
     {
         Dictionary<int, string> _tileKeys;
+        List<int> _primeKeys;
         public readonly int _shift;
 
         public TileProvider(int shift = 8)
@@ -331,6 +344,7 @@ namespace PCGTest.Display.MonoGame
                 // Ensure void always maps to Solid Black
                 {0, "SolidBlack" }
             };
+            _primeKeys = new List<int>();
             _shift = shift;
         }
 
@@ -340,7 +354,6 @@ namespace PCGTest.Display.MonoGame
         /// Given a base tile key expand it to all
         /// </summary>
         /// <param name="tileKey">The key to be expanded.</param>
-        /// <param name="tileKeys">The dictionary to be populated.</param>
         public void AddTileType(KeyValuePair<int, string> tileKey)
         {
             var shifted = tileKey.Key << _shift;
@@ -348,6 +361,7 @@ namespace PCGTest.Display.MonoGame
                 return;
             // Always add tileKey
             _tileKeys[shifted] = tileKey.Value;
+            _primeKeys.Add(tileKey.Key);
             // Look up key in map of keys to <offset, suffix> pairs
             var expansion = GetExpansionData(tileKey.Value);
             foreach (var pair in expansion)
@@ -404,6 +418,7 @@ namespace PCGTest.Display.MonoGame
         /// <returns></returns>
         public int[,] ResolveMap(int[,] map)
         {
+            EnsureAffiliatesRegistered();
             TileType variation;
             int id, shifted;
             int width = map.GetLength(0);
@@ -446,6 +461,22 @@ namespace PCGTest.Display.MonoGame
                 }
             }
             return result;
+        }
+
+        private void EnsureAffiliatesRegistered()
+        {
+            string name;
+            foreach (int k in _primeKeys)
+            {
+                if (!MapSolver.Affiliates.ContainsKey(k))
+                    MapSolver.Affiliates[k] = new List<int>();
+                name = _tileKeys[k << _shift];
+                foreach (int other in _primeKeys)
+                {
+                    if (_tileKeys[other << _shift].Contains(name) && !MapSolver.Affiliates[k].Contains(other))
+                        MapSolver.Affiliates[k].Add(other);
+                }
+            }
         }
     }
 }

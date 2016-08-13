@@ -37,6 +37,24 @@ namespace PCGTest.Test.Display.MonoGame
         }
 
         [Test]
+        public void TilesMatch_Matches_Same_Tile()
+        {
+            MapSolver.TilesMatch(1234, 1234).Should().BeTrue("because the tiles are the same");
+            // Ensure Affiliates map is empty
+            MapSolver.Affiliates.Clear();
+            MapSolver.TilesMatch(1234, 4321).Should().BeFalse("because the tiles are not the same");
+        }
+
+        [Test]
+        public void TilesMatch_Matches_Affiliate_Tiles()
+        {
+            MapSolver.Affiliates.Clear();
+            MapSolver.Affiliates[1234] = new List<int> { 5678 };
+            MapSolver.TilesMatch(1234, 5678).Should().BeTrue("because 1234 is affiliated with 5678");
+            MapSolver.TilesMatch(1234, 4321).Should().BeFalse("because 1234 is not affiliated with 4321");
+        }
+
+        [Test]
         public void CalculateNeighborhood_Returns_Matched_Tile_Bits()
         {
             var map = new int[3, 3];
@@ -50,6 +68,47 @@ namespace PCGTest.Test.Display.MonoGame
                 { "000111000", 24 },
                 { "011010110", 102 },
                 { "100010000", 128 }
+            };
+            int x, y, hood;
+            foreach (var pair in bits)
+            {
+                for (var i = 0; i < 9; i++)
+                {
+                    x = i % 3;
+                    y = i / 3;
+                    map[x, y] = pair.Key[i];
+                }
+                hood = MapSolver.CalculateNeighborhood(1, 1, map);
+                hood.Should().Be(pair.Value);
+            }
+        }
+
+
+        [Test]
+        public void CalculateNeighborhood_Returns_Matched_Tile_Bits_With_Affiliates()
+        {
+            MapSolver.Affiliates.Clear();
+            MapSolver.Affiliates['1'] = new List<int> { '5' };
+            MapSolver.TilesMatch('1', '5').Should().BeTrue("because I set 5 affiliated with 1");
+            var map = new int[3, 3];
+            var bits = new Dictionary<string, int>()
+            {
+                //   Pivot (with affiliates)
+                //     V
+                { "000010005", 1 },
+                { "010511050", 90 },
+                { "500010005", 129 },
+                { "000515000", 24 },
+                { "015010510", 102 },
+                { "500010000", 128 },
+                //   Pivot (with non-affiliates)
+                //     V
+                { "020010301", 1 },
+                { "013111210", 90 },
+                { "102010301", 129 },
+                { "020111300", 24 },
+                { "011312110", 102 },
+                { "103012000", 128 }
             };
             int x, y, hood;
             foreach (var pair in bits)
@@ -160,6 +219,52 @@ namespace PCGTest.Test.Display.MonoGame
                 { 1, "Floor" },
                 { 2, "Wall.one" },
                 { 3, "wall.two" },
+            };
+            var provider = new TileProvider();
+            foreach (var key in keys)
+            {
+                provider.AddTileType(key);
+            }
+            var map = new int[,] {
+                { 1, 1, 1, 2, 1, 1, 1 },
+                { 1, 2, 2, 2, 2, 2, 1 },
+                { 1, 2, 1, 1, 1, 3, 1 },
+                { 2, 2, 1, 9, 1, 3, 3 },
+                { 1, 2, 1, 1, 1, 3, 1 },
+                { 1, 3, 3, 3, 3, 3, 1 },
+                { 1, 1, 1, 3, 1, 1, 1 }
+            };
+            var result = provider.ResolveMap(map);
+            result.GetLength(0).Should().Be(7, "because that is the input width");
+            result.GetLength(1).Should().Be(7, "because that is the input height");
+            result[3, 3].Should().Be(0, "because unknown keys resolve to 0");
+            int source, res, unshifted, lower;
+            for (var y = 0; y < 7; y++)
+            {
+                for (var x = 0; x < 7; x++)
+                {
+                    if ((x == 3 && y == 3) || MapSolver.IsBorder(x, y, map))
+                        continue;
+                    source = map[x, y];
+                    res = result[x, y];
+                    unshifted = res >> provider._shift;
+                    unshifted.Should().Be(source, "because right shift drops lower bits");
+                    lower = (source << provider._shift) ^ res;
+                    lower.Should().NotBe(0);
+                }
+            }
+        }
+
+        [Test]
+        public void ResolveMap_Returns_Map_Using_Expanded_Keys_With_Affiliates()
+        {
+            var keys = new Dictionary<int, string>()
+            {
+                { 0, "Blank" },
+                { 1, "Floor" },
+                { 2, "Wall.one" },
+                { 3, "wall.two" },
+                { 5, "wall.two.extra" },
             };
             var provider = new TileProvider();
             foreach (var key in keys)
